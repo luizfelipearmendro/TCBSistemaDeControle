@@ -16,5 +16,6 @@ namespace TCBSistemaDeControle.Data
         public DbSet<RacaModel> Raca { get; set; }
 
         public DbSet<EstadoCivilModel> EstadoCivil { get; set; }
+
     }
 }

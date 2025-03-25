@@ -3,3 +3,48 @@
     Layout = null;
     <title>@ViewData["Title"]Login</title>
 }
+
+<form asp-controller="Usuarios" asp-action="Cadastrar" method="post">
+    <div class="mb-3">
+        <label for="exampleInputNome" class="form-label">Nome Completo</label>
+        <input type="text" asp-for="NomeCompleto" class="form-control" id="exampleInputNome" aria-describedby="nomeHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Senha</label>
+        <input type="password" asp-for="Senha" class="form-control" id="exampleInputPassword1">
+    </div>
+@*     <div class="form-group">
+        <label for="perfil">Perfil</label>
+        <select asp-for="TipoPerfil" class="form-control">
+            <option value="0">TipoSelecione</option>
+            <option value="1" selected="@(Model.TipoPerfil == 1)">Administrador</option>
+            <option value="2" selected="@(Model.TipoPerfil == 2)">Usuário Padrão</option>
+        </select>
+    </div> *@
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Lembrar Senha</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
+
+
+<form asp-controller="login" asp-action="Login" method="post">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Senha</label>
+        <input type="password" asp-for="Senha" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Lembrar Senha</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Entrar</button>
+</form>

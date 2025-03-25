@@ -48,7 +48,6 @@ namespace TCBSistemaDeControle.Controllers
             usuario.Confirmado = 0;
             usuario.DataCadastro = DateTime.Now;
 
-
             if (ModelState.IsValid)
             {
                 db.Usuarios.Add(usuario);
