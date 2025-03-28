@@ -5,46 +5,46 @@ namespace TCBSistemaDeControle.Models
 {
     public class FuncionariosModel
     {
-        public int Id { get; set; }
+        public int Id { get; set; } // id do funcionario
 
-        public int UsuarioId { get; set; }
+        public int UsuarioId { get; set; } // usuario que cadastrou o funcionario
 
-        public string Nome { get; set; }
+        public string Nome { get; set; } // nome do funcionario
 
-        public DateTime DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; } // data de nascimento do funcionario
 
-        public char Sexo { get; set; }
+        public char Sexo { get; set; } // sexo do funcionario
 
-        public int Raca { get; set; }
+        public int Raca { get; set; } // raça do funcionario
 
-        public int EstadoCivil { get; set; }
+        public int EstadoCivil { get; set; } // estado civil do funcionario
 
-        public string? NomeMae { get; set; }
+        public string? NomeMae { get; set; } // nome da mae do funcionario
 
-        public string Naturalidade { get; set; }
+        public string Naturalidade { get; set; } // naturalidade do funcionario
 
-        public string Endereco { get; set; }
+        public string Endereco { get; set; } // endereco do funcionario
 
-        public string CidadeResidencia { get; set; }
+        public string CidadeResidencia { get; set; } // cidade de residencia do funcionario
 
         [EmailAddress(ErrorMessage = "O e-mail informado não é válido!")]
-        public string Email { get; set; }
+        public string Email { get; set; } // e-mail do funcionario
 
         [Phone(ErrorMessage = "O celular informado não é válido!")]
-        public string Celular { get; set; }
+        public string Celular { get; set; }// celular do funcionario
 
-        public string Setor { get; set; }
+        public int SetorId { get; set; } // setor do funcionario
 
-        public string Cargo { get; set; }
+        public string Cargo { get; set; } // cargo do funcionario
 
-        public Decimal Salario { get; set; }
+        public Decimal Salario { get; set; } // salario do funcionario
 
-        public DateTime DataIngresso { get; set; }
+        public DateTime DataIngresso { get; set; } // data de ingresso do funcionario
 
-        public int DiasTrabalhados { get; set; }
+        public int DiasTrabalhados { get; set; } // dias trabalhados no mes
 
-        public DateTime DataCadastro { get; set; }
+        public DateTime DataCadastro { get; set; } // data de cadastro do funcionario
 
-        public DateTime? DataAtualizacao { get; set; }
+        public DateTime? DataAtualizacao { get; set; } // data da ultima atualizacao do cadastro
     }
 }

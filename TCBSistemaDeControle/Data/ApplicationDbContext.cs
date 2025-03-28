@@ -17,5 +17,6 @@ namespace TCBSistemaDeControle.Data
 
         public DbSet<EstadoCivilModel> EstadoCivil { get; set; }
 
+        public DbSet<SetoresModel> Setores { get; set; }
     }
 }

@@ -70,17 +70,17 @@ namespace TCBSistemaDeControle.Controllers
                 HtmlBody = @"
                 <html>
                     <body>
-                        <img src='cid:logo' alt='Logo da MS Tendas' width='150' height='90' />
+                        <img src='cid:logo' alt='Logo TCB' width='150' height='90' />
                         <p>" + mensagemCorpo + @"</p>
                     </body>
                 </html>"
             };
 
             // Caminho físico da imagem
-            var logoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "imagens", "MS TENDAS 3D.png");
+            var logoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "imglogo.png");
 
             // Adicionando a logo como anexo inline
-            bodyBuilder.Attachments.Add(logoPath, new ContentType("image", "png") { Name = "MS TENDAS 3D.png" })
+            bodyBuilder.Attachments.Add(logoPath, new ContentType("image", "png") { Name = "imglogo.png" })
                          .ContentId = "logo";
 
             message.Body = bodyBuilder.ToMessageBody();

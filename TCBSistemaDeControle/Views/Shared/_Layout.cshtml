@@ -15,39 +15,135 @@
     <link href="https://cdn.datatables.net/v/dt/dt-2.0.8/datatables.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TCBSistemaDeControle</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <header class="d-flex justify-content-between align-items-center p-3 bg-light border-bottom shadow-sm">
+            <!-- Botão do menu lateral -->
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <!-- Offcanvas Menu -->
+        <div class="offcanvas offcanvas-start show" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="width: 350px;">
+                <div class="offcanvas-header">
+                    <a class="navbar-brand text-black fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
+                        @* <i class="bi bi-house-door-fill"></i> TCBSistemaDeControle *@
+                        <img src="~/img/logo.png" alt="Logo TCB" width="50" height="50"/>
+                    </a>
+                    <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
+                <div class="offcanvas-body">
+                    <hr class="text-white">
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <p class="nav-link text-black" ><i class="bi bi-person-circle"></i> Olá, @ViewBag.NomeCompleto</p>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-black" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-house"></i> Página Inicial</a>
+                        </li>
+
+                        @if(ViewBag.TipoPerfil == 1)
+                        {
+                            <div class="accordion accordion-flush" id="accordionSetores">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOneSetores" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            <i class="bi bi-building" style="padding-right:5px;"></i> Setores
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOneSetores" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Setores" asp-action="Index"><i class="bi bi-diagram-3"></i> Todos os Setores</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (ViewBag.TipoPerfil == 1)
+                        {
+                            <div class="accordion accordion-flush" id="accordionFuncionarios">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOneFuncionarios" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            <i class="bi bi-people" style="padding-right:5px;"></i> Funcionários
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOneFuncionarios" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Funcionarios" asp-action="Index"><i class="bi bi-diagram-3"></i> Todos os Funcionários</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Funcionarios" asp-action="Criar"><i class="bi bi-person-plus"></i> Cadastrar Novo Funcionário</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (ViewBag.TipoPerfil == 1)
+                        {
+                            <div class="accordion accordion-flush" id="accordionUsuarios">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOneUsuarios" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            <i class="bi bi-person-gear" style="padding-right:5px;"></i> Usuários
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOneUsuarios" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index"><i class="bi bi-diagram-3"></i> Todos os Usuários</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Cadastrar"><i class="bi bi-person-plus"></i> Cadastrar Novo Usuário</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link text-black" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="bi bi-shield-lock"></i> Privacidade</a>
+                        </li>
+                </ul>
             </div>
-        </nav>
+
+            <footer class="border-top footer text-muted">
+                <div class="container">
+                    &copy; 2025 - TCBSistemaDeControle - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Dropdown de usuário -->
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" style="background-color: #3c1d11; border-color: #3c1d11;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-envelope"></i> @ViewBag.Email
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item text-danger" asp-controller="Login" asp-action="Logout"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+            </ul>
+        </div>
+
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+@*     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - TCBSistemaDeControle - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
-    <script src="~/js/security.js"></script>
+    </footer> *@
+    @* <script src="~/js/security.js"></script> *@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
