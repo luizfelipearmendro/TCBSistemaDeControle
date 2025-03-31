@@ -31,6 +31,11 @@ namespace TCBSistemaDeControle.Controllers
             return View(usuarios);
         }
 
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Cadastrar(UsuariosModel usuario)
         {
@@ -54,6 +59,7 @@ namespace TCBSistemaDeControle.Controllers
                 db.SaveChanges();
 
                 TempData["MensagemSucesso"] = "Usuário cadastrado com sucesso!";
+                return RedirectToAction("Index", "Login");
             }
             return RedirectToAction("Index", "Login");
         }
@@ -70,7 +76,7 @@ namespace TCBSistemaDeControle.Controllers
                 HtmlBody = @"
                 <html>
                     <body>
-                        <img src='cid:logo' alt='Logo TCB' width='150' height='90' />
+                        <img src='cid:logo' alt='Logo TCB' width='120' height='90' />
                         <p>" + mensagemCorpo + @"</p>
                     </body>
                 </html>"
@@ -91,7 +97,7 @@ namespace TCBSistemaDeControle.Controllers
                 {
                     //Utilizar mailtrap.io ou mailgun
                     client.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-                    client.Authenticate("tchacomback@gmail.com", "owrh etop ghqh fpbc");
+                    client.Authenticate("tchacomback@gmail.com", "qark grzc ltgk arsz ");
                     client.Send(message);
                 }
                 catch (Exception ex)

@@ -1,4 +1,11 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿//funcionalidade de ao clicar o botao da mensagem de alerta, saia da tela
+$(document).ready(function () {
+    $('.closebtn').click(function () {
+        $(this).closest('.alert').fadeOut();  // Fechar o alerta ao clicar no botão
+    });
 
-// Write your JavaScript code.
+    // Fechar automaticamente o alerta após 3 segundos
+    setTimeout(function () {
+        $('.alert').fadeOut(); // Use um ponto para separar as classes
+    }, 3000); // 3000 milissegundos = 3 segundos
+});

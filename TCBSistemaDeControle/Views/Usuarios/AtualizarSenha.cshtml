@@ -1,7 +1,7 @@
-﻿@model UsuariosModel
+﻿@model AtualizarSenhaViewModel
 @{
     Layout = null;
-    <title>@ViewData["Title"]Login</title>
+    <title>@ViewData["Title"]Atualizar Senha</title>
 }
 
 <!DOCTYPE html>
@@ -9,8 +9,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="~/js/site.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -41,16 +39,17 @@
     <div class="w-1/2 flex items-center justify-center bg-white p-8" id="divForm">
         <div class="w-96">
             <p class="text-center"><span style="color:#3c1d11; font-size:15px;">TCB </span><span style="font-size:15px">Sistema de Controle de Funcionários</span></p>
-            <h2 id="tituloLogin" class="text-2xl font-bold text-center text-gray-800 mb-6">Bem-vindo(a)</h2>
-            @Html.AntiForgeryToken()
-            <form asp-controller="Login" asp-action="Login" method="post">
-                <div class="input-group">
-                    <input type="email" asp-for="Email" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
-                    <label for="email">E-mail</label>
-                </div>
+            <h2 id="tituloLogin" class="text-2xl font-bold text-center text-gray-800 mb-6">Redefina a senha</h2>
+            @using (Html.BeginForm("AtualizarSenha", "Usuarios", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.Hash)
+
+
                 <div class="input-group relative">
-                    <input type="password" asp-for="Senha" id="password" class="w-full border rounded-lg p-3 pr-10 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
-                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="novaSenha" class="w-full border rounded-lg p-3 pr-10 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
+                    <label for="novaSenha">Nova Senha</label>
                     <span class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onclick="togglePassword()">
                         <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
@@ -58,10 +57,21 @@
                         </svg>
                     </span>
                 </div>
-                <button type="submit" class="w-full text-white font-bold py-3 rounded-lg transition-all">Entrar</button>
-            </form>
-            <p class="text-center text-gray-500 text-sm mt-4">Novo aqui? <a id="linkRecuperarSenha" class="nav-link hover:underline" asp-controller="Usuarios" asp-action="Cadastrar">Cadastrar aqui</a></p>
-            <p class="text-center text-gray-500 text-sm mt-4">Esqueceu sua senha? <a id="linkRecuperarSenha" class="nav-link hover:underline" asp-controller="Usuarios" asp-action="EsqueceuSenha">Recupere aqui</a></p>
+
+                <div class="input-group relative">
+                    <input type="password" id="password2" name="confirmarSenha" class="w-full border rounded-lg p-3 pr-10 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
+                    <label for="confirmarSenha">Confirmar Senha</label>
+                    <span class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onclick="togglePassword2()">
+                        <svg id="eye-icon2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                        </svg>
+                    </span>
+                </div>
+
+                <button type="submit" class="w-full text-white font-bold py-3 rounded-lg transition-all">Atualizar Senha</button>
+            }
+            <p class="text-center text-gray-500 text-sm mt-4">Novo aqui? <a asp-area="" asp-controller="Login" asp-action="Index" id="linkRecuperarSenha" class="hover:underline">Voltar ao Login</a></p>
         </div>
     </div>
     <div class="w-1/2 h-screen bg-cover bg-center" id="divImgLogin"><img id="imgLogin" src="~/img/woman-selecting-pictures-people.jpg" /></div>
@@ -78,6 +88,24 @@
             } else {
                 passwordInput.type = "password";
                 eyeIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                </svg>`;
+            }
+        }
+
+        function togglePassword2() {
+            const passwordInput2 = document.getElementById("password2");
+            const eyeIcon2 = document.getElementById("eye-icon2");
+            if (passwordInput2.type === "password") {
+                passwordInput2.type = "text";
+                eyeIcon2.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                    <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7 7 0 0 0 2.79-.588M5.21 3.088A7 7 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474z"/>
+                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12z"/>
+                </svg>`;
+            } else {
+                passwordInput2.type = "password";
+                eyeIcon2.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
                     <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
                 </svg>`;
