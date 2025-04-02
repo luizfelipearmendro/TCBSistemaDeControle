@@ -21,7 +21,11 @@ namespace TCBSistemaDeControle.Models
         public string Localizacao { get; set; } = string.Empty; // Localização dentro da empresa  
         
         public DateTime DataCriacao { get; set; } = DateTime.Now; // Data de criação do setor  
-        
-        public bool Ativo { get; set; } = true; // Indica se o setor está ativo 
+
+        public DateTime DataAtualizacao { get; set; } = DateTime.Now; // Data de atualização do setor
+
+        public char Ativo { get; set; } = 'S'; // Indica se o setor está ativo ou não
+
+        public int UsuarioId { get; set; } // Identificador do usuário que criou o setor
     }
 }
