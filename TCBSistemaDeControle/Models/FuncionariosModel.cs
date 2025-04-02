@@ -46,7 +46,5 @@ namespace TCBSistemaDeControle.Models
         public DateTime DataCadastro { get; set; } // data de cadastro do funcionario
 
         public DateTime? DataAtualizacao { get; set; } // data da ultima atualizacao do cadastro
-
-        public char Ativo { get; set; } // status do funcionario
     }
 }
