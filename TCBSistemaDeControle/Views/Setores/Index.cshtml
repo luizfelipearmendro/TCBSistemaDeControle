@@ -1,0 +1,50 @@
+﻿@model SetoresViewModel
+@{
+    ViewData["Title"] = "Setores";
+}
+
+<!-- Mensagens de alerta -->
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert success" role="alert">
+        <span class="closebtn">&times;</span>
+        <strong>Sucesso!</strong> @TempData["MensagemSucesso"]
+    </div>
+}
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert danger" role="alert">
+        <span class="closebtn">&times;</span>
+        <strong>Atenção!</strong> @TempData["MensagemErro"]
+    </div>
+}
+
+<br />
+<br />
+<br />
+<br />
+@if(Model != null)
+{
+    foreach(var setores in Model.Setores)
+    {
+        <div class="card text-center">
+            <div class="card-header">
+                @setores.Nome
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Qtd. Funcionarios: @setores.NumeroFuncionarios</h5>
+                <p class="card-text">Descrição: @setores.Descricao</p>
+                <br />
+                <p class="card-text">Responsável: @setores.ResponsavelSetor</p>
+                <p class="card-text">E-mail Responsável: @setores.EmailResposavelSetor</p>
+                <p class="card-text">Localizado: @setores.Localizacao</p>
+                <p class="card-text">Ativo: @setores.Ativo</p>
+                <a href="#" class="btn btn-primary">Ver Setor</a>
+            </div>
+            <div class="card-footer text-body-secondary">
+                @setores.DataCriacao
+            </div>
+        </div>
+    }
+}
