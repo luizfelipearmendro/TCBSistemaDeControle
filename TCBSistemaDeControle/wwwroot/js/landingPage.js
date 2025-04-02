@@ -1,4 +1,4 @@
-﻿// Função para controlar a exibição do rodapé e o cabeçalho durante a rolagem
+﻿
 function rolagemRodape(posicaoRolagem, alturaRodape) {
     const rodape = document.querySelector('footer');
     const cabecalho = document.querySelector('.cabecalho-box-one');
@@ -23,9 +23,7 @@ function rolagemRodape(posicaoRolagem, alturaRodape) {
     }
 }
 
-// Espera o DOM carregar completamente
 document.addEventListener("DOMContentLoaded", function () {
-    // Obtém os elementos necessários
     const alturaJanela = window.innerHeight;
     const rodape = document.querySelector('footer');
     const conteudo = document.querySelector('.conteúdo');
@@ -43,11 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const alturaConteudo = conteudo.offsetHeight;
     const alturaDocumento = alturaJanela + alturaConteudo + alturaRodape - 20;
 
-    // Define as dimensões dos elementos para animação
+   
     animacaoRolagem.style.height = `${alturaDocumento}px`;
     principalAnimacaoRolagem.style.height = `${alturaDocumento}px`;
 
-    // Define o tamanho do cabeçalho e ajusta o invólucro paralaxe
+    
     cabecalho.style.height = `${alturaJanela}px`;
     invólucroParalaxe.style.marginTop = `${alturaJanela}px`;
 
@@ -71,33 +69,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// Função para verificar se um elemento está visível na tela
-function isElementInViewport(el) {
-    const rect = el.getBoundingClientRect();
+function estaElementoNaTela(el) {
+    const retangulo = el.getBoundingClientRect();
     return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        retangulo.top >= 0 &&
+        retangulo.left >= 0 &&
+        retangulo.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        retangulo.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
 }
 
-// Função para aplicar animações aos elementos
-function applyScrollAnimations() {
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach((element) => {
-        if (isElementInViewport(element)) {
-            element.classList.add('active');
+function aplicarAnimacoesScroll() {
+    const elementos = document.querySelectorAll('.animar-com-scroll');
+    elementos.forEach((elemento) => {
+        if (estaElementoNaTela(elemento)) {
+            elemento.classList.add('ativo');
         }
     });
 }
 
-// Chama a função inicialmente para verificar elementos já visíveis
 document.addEventListener('DOMContentLoaded', () => {
-    applyScrollAnimations();
+    aplicarAnimacoesScroll();
 });
 
-// Monitora a rolagem para aplicar animações dinamicamente
 window.addEventListener('scroll', () => {
-    applyScrollAnimations();
+    aplicarAnimacoesScroll();
 });
