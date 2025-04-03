@@ -13,8 +13,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="~/css/login.css">
-    <title>Login</title>
+    <title>Esqueceu Senha</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex h-screen">
@@ -46,7 +53,7 @@
                     <input type="email" asp-for="Email" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
                     <label for="exampleInputEmail">E-mail</label>
                 </div>
-                <button type="submit" class="w-full text-white font-bold py-3 rounded-lg transition-all">Solicitar Redefinição de Senha</button>
+                <button type="submit" class="w-full text-white font-bold py-3 rounded-lg transition-all botao-entrar">Solicitar Redefinição de Senha</button>
             </form>
             <p class="text-center text-gray-500 text-sm mt-4">Já tenho cadastro. <a asp-area="" asp-controller="Login" asp-action="Index" id="linkRecuperarSenha" class="hover:underline">Voltar ao Login</a></p>
         </div>

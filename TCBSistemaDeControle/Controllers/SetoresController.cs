@@ -26,7 +26,7 @@ namespace TCBSistemaDeControle.Controllers
             }
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
             var idUsuario = HttpContext.Session.GetInt32("idUsuario");
             if (idUsuario == null) return RedirectToAction("Index", "Login");
@@ -37,16 +37,23 @@ namespace TCBSistemaDeControle.Controllers
 
             var sessionIdUsuario = dbconsult.Id;
 
-            IQueryable<SetoresModel> setoresQuery;
+            IQueryable<SetoresModel> setoresQuery = db.Setores.Where(s => s.UsuarioId == sessionIdUsuario);
 
-            setoresQuery = db.Setores.Where(s => s.UsuarioId == sessionIdUsuario);
+            // Aplica o filtro se houver um termo de pesquisa
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                setoresQuery = setoresQuery.Where(s =>
+                    s.Nome.Contains(searchString) ||
+                    s.Descricao.Contains(searchString) ||
+                    s.ResponsavelSetor.Contains(searchString)
+                );
+            }
 
-            var setores = setoresQuery.OrderBy(s => s.Nome).Select(s => new SetoresModel 
-            { 
+            var setores = setoresQuery.OrderBy(s => s.Nome).Select(s => new SetoresModel
+            {
                 Id = s.Id,
                 Nome = s.Nome,
                 Descricao = s.Descricao,
-                NumeroFuncionarios = s.NumeroFuncionarios,
                 Ativo = s.Ativo,
                 DataCriacao = s.DataCriacao,
                 DataAtualizacao = s.DataAtualizacao,
@@ -65,11 +72,10 @@ namespace TCBSistemaDeControle.Controllers
                 Console.WriteLine("Nenhum setor encontrado!");
             }
 
-            var email = dbconsult.Email;
-            var nomeCompleto = dbconsult.NomeCompleto;
-
-            ViewBag.NomeCompleto = nomeCompleto;
-            ViewBag.Email = email;
+            ViewBag.NomeCompleto = dbconsult.NomeCompleto;
+            ViewBag.Email = dbconsult.Email;
+            ViewBag.TipoPerfil = dbconsult.TipoPerfil;
+            ViewBag.SearchString = searchString; // Para manter o valor no input
 
             return View(viewModel);
         }
@@ -103,7 +109,6 @@ namespace TCBSistemaDeControle.Controllers
                 {
                     Nome = nome,
                     Descricao = descricao,
-                    NumeroFuncionarios = numeroFuncionarios,
                     ResponsavelSetor = responsavelSetor,
                     EmailResposavelSetor = emailResponsavelSetor,
                     Localizacao = localizacao,

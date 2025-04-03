@@ -94,15 +94,15 @@ bod, html {
             align-items: center;
         }
 
-            .botao-entrar {
-                background: linear-gradient(90deg,#8A2BE2, #FFA500);
-                border-radius: .5vw;
-                color: white;
-                font-family: "Roboto", sans-serif;
-                border: none;
-                padding: 1vh;
-                font-size: 1.2rem;
-            }
+.botao-entrar {
+    background: linear-gradient(90deg,#8A2BE2, #FFA500);
+    border-radius: .5vw;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    padding: 1vh;
+    font-size: 1.2rem;
+}
 
                 .botao-entrar:hover {
                     background: #FFA500;

@@ -11,8 +11,6 @@ namespace TCBSistemaDeControle.Models
         
         public string Descricao { get; set; } = string.Empty; // Descrição do setor  
         
-        public int NumeroFuncionarios { get; set; } // Quantidade de funcionários no setor  
-        
         public string ResponsavelSetor { get; set; } = string.Empty; // Nome do responsável pelo setor  
 
         [EmailAddress(ErrorMessage = "O e-mail informado não é válido!")]
@@ -22,7 +20,7 @@ namespace TCBSistemaDeControle.Models
         
         public DateTime DataCriacao { get; set; } = DateTime.Now; // Data de criação do setor  
 
-        public DateTime DataAtualizacao { get; set; } = DateTime.Now; // Data de atualização do setor
+        public DateTime DataAtualizacao { get; set; } // Data de atualização do setor
 
         public char Ativo { get; set; } = 'S'; // Indica se o setor está ativo ou não
 

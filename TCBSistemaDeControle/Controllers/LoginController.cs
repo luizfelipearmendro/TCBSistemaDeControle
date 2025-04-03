@@ -66,7 +66,7 @@ namespace TCBSistemaDeControle.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "LandingPage");
         }
     }
 }
