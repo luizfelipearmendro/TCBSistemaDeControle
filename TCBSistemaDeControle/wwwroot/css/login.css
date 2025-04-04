@@ -1,218 +1,218 @@
-﻿/*------------ login*/
+﻿
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Montserrat', sans-serif;
 }
 * {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
+padding: 0px;
+margin: 0px;
+box-sizing: border-box;
 }
 
 bod, html {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-    width: 100vw;
-    height: 100vh;
+padding: 0px;
+margin: 0px;
+box-sizing: border-box;
+width: 100vw;
+height: 100vh;
 }
 
 
 .login {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 100%;
-    height: 100%;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+width: 100%;
+height: 100%;
     
 }
 
-    .login .box-one-login {
-        background: url("https://img.freepik.com/fotos-gratis/mulher-linda-sorrindo_23-2148729652.jpg?t=st=1743615829~exp=1743619429~hmac=54db31321a2362d757631ed334e64334af3635049d88d7386d4fb3443c51edce&w=996");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        position: relative;
-    }
+.login .box-one-login {
+background: url("https://img.freepik.com/fotos-gratis/mulher-linda-sorrindo_23-2148729652.jpg?t=st=1743615829~exp=1743619429~hmac=54db31321a2362d757631ed334e64334af3635049d88d7386d4fb3443c51edce&w=996");
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+position: relative;
+}
 
-        .login .box-one-login:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
+.login .box-one-login:before {
+content: "";
+position: absolute;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+}
 
-    .login .box-two-login {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-        background-color: white;
-        gap: 2vh;
-    }
+.login .box-two-login {
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+width: 100%;
+height: 100%;
+background-color: white;
+gap: 2vh;
+}
 
-        .login .box-two-login .flex-form form {
-            width: 40vw;
-            height: 100%;
-        }
-        .login .box-two-login .flex-bem-vindo{
-            display:flex;
-            justify-content: center;
-            align-items:center;
-            flex-direction:column;
-        }
-            .login .box-two-login .flex-bem-vindo h3 {
-                font-family: "Bebas Neue", sans-serif;
-                font-size: 3rem;
-                background: linear-gradient(90deg, #8A2BE2, #FFA500 );
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                width: 100%;
-                font-weight: bold ;
-                text-align: center;
+.login .box-two-login .flex-form form {
+width: 40vw;
+height: 100%;
+}
+.login .box-two-login .flex-bem-vindo{
+display:flex;
+justify-content: center;
+align-items:center;
+flex-direction:column;
+}
+.login .box-two-login .flex-bem-vindo h3 {
+font-family: "Bebas Neue", sans-serif;
+font-size: 3rem;
+background: linear-gradient(90deg, #8A2BE2, #FFA500 );
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+width: 100%;
+font-weight: bold ;
+text-align: center;
            
-            }
+}
 
-            .login .box-two-login .flex-bem-vindo p {
+.login .box-two-login .flex-bem-vindo p {
         
-                font-weight: bold;
-                font-family: 'Montserrat', sans-serif;
-                text-align:center;
+font-weight: bold;
+font-family: 'Montserrat', sans-serif;
+text-align:center;
                 
-            }
+}
 
 
 
-        .login .box-two-login .flex-form form .flex-botao-form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.login .box-two-login .flex-form form .flex-botao-form {
+display: flex;
+justify-content: center;
+align-items: center;
+}
 
-            .botao-entrar {
-                background: linear-gradient(90deg,#8A2BE2, #FFA500);
-                border-radius: .5vw;
-                color: white;
-                font-family: "Roboto", sans-serif;
-                border: none;
-                padding: 1vh;
-                font-size: 1.2rem;
-            }
+.botao-entrar {
+background: linear-gradient(90deg,#8A2BE2, #FFA500);
+border-radius: .5vw;
+color: white;
+font-family: "Roboto", sans-serif;
+border: none;
+padding: 1vh;
+font-size: 1.2rem;
+}
 
-                .botao-entrar:hover {
-                    background: #FFA500;
-                    transition: .5s ease-in-out;
-                }
+.botao-entrar:hover {
+background: #FFA500;
+transition: .5s ease-in-out;
+}
 
 
 @media (max-width: 890px) {
-    body {
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        width:100%;
-    }
+body {
+align-items: center;
+justify-content: center;
+flex-direction: column;
+width:100%;
+}
 
-    #divForm{
-        width:100%;
-    }
+#divForm{
+width:100%;
+}
 
-    #imgLogin{
-        display:none;
-    }
+#imgLogin{
+display:none;
+}
 
-    #divImgLogin{
-        display:none;
-    }
+#divImgLogin{
+display:none;
+}
 }
 
 .alert {
-    padding: 20px;
-    color: white;
-    opacity: 1;
-    transition: opacity 0.6s;
-    margin-bottom: 15px;
-    z-index: 1001;
-    position: fixed; /* Para fixar na tela */
-    top: 20px; /* Distância do topo */
-    right: 20px; /* Distância da direita */
-    border-radius: 5px; /* Borda arredondada opcional */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+padding: 20px;
+color: white;
+opacity: 1;
+transition: opacity 0.6s;
+margin-bottom: 15px;
+z-index: 1001;
+position: fixed; /* Para fixar na tela */
+top: 20px; /* Distância do topo */
+right: 20px; /* Distância da direita */
+border-radius: 5px; /* Borda arredondada opcional */
+box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra opcional */
 }
 
-    .alert.danger {
-        background-color: #f44336;
-    }
+.alert.danger {
+background-color: #f44336;
+}
 
-    .alert.success {
-        background-color: #04AA6D;
-    }
+.alert.success {
+background-color: #04AA6D;
+}
 
-    .alert.info {
-        background-color: #2196F3;
-    }
+.alert.info {
+background-color: #2196F3;
+}
 
-    .alert.warning {
-        background-color: #ff9800;
-    }
+.alert.warning {
+background-color: #ff9800;
+}
 
 .closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
+margin-left: 15px;
+color: white;
+font-weight: bold;
+float: right;
+font-size: 22px;
+line-height: 20px;
+cursor: pointer;
+transition: 0.3s;
 }
 
-    .closebtn:hover {
-        color: black;
-    }
+.closebtn:hover {
+color: black;
+}
 
 .input-group {
-    position: relative;
-    margin-bottom: 20px;
-    width: 100%;
+position: relative;
+margin-bottom: 20px;
+width: 100%;
 }
 
-    .input-group label {
-        position: absolute;
-        top: 50%;
-        left: 10px;
-        transform: translateY(-50%);
-        color: #aaa;
-        transition: 0.3s;
-    }
+.input-group label {
+position: absolute;
+top: 50%;
+left: 10px;
+transform: translateY(-50%);
+color: #aaa;
+transition: 0.3s;
+}
 
-    .input-group input:focus ~ label,
-    .input-group input:not(:placeholder-shown) ~ label {
-        top: 5px;
-        left: 5px;
-        font-size: 12px;
-        color: black;
-    }
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+top: 5px;
+left: 5px;
+font-size: 12px;
+color: black;
+}
 
 .eye-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
+position: absolute;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+cursor: pointer;
 }
 
 #imgLogin {
-    width: 100%;
-    height: 100%;
+width: 100%;
+height: 100%;
 }
 
 #linkRecuperarSenha {
-    color: #FFA500;
+color: #FFA500;
 }
 

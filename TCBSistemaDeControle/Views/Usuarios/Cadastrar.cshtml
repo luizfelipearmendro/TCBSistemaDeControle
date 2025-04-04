@@ -11,9 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet">
-    <link rel="stylesheet" href="~/css/login.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/cadastrar.css">
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -36,36 +36,42 @@
             </div>
     }
 
-    <div class="w-1/2 flex items-center justify-center bg-white p-8" id="divForm">
-        <div class="w-96">
-            <p class="text-center"><span style="color:#3c1d11; font-size:15px;">TCB </span><span style="font-size:15px">Sistema de Controle de Funcionários</span></p>
-            <h2 id="tituloLogin" class="text-2xl font-bold text-center text-gray-800 mb-6">Cadastre-se</h2>
-            @Html.AntiForgeryToken()
-            <form asp-controller="Usuarios" asp-action="Cadastrar" method="post">
-                <div class="input-group">
-                    <input type="text" asp-for="NomeCompleto" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
-                    <label for="exampleInputNome">Nome Completo</label>
+    <section class="login">
+        <div class="box-one-login"></div>
+        <div class="box-two-login">
+            <div class="flex-bem-vindo">
+                <h3>Seja bem-vindo(a)</h3>
+                <p class="text-gray-500">TCB Sistema de Controle de Funcionários</p>
+            </div>
+            <div class="w-1/2 flex items-center justify-center bg-white p-8" id="divForm">
+                <div class="w-96">
+                    @Html.AntiForgeryToken()
+                    <form asp-controller="Usuarios" asp-action="Cadastrar" method="post">
+                        <div class="input-group">
+                            <input type="text" asp-for="NomeCompleto" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
+                            <label for="exampleInputNome">Nome Completo</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" asp-for="Email" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
+                            <label for="exampleInputEmail">E-mail</label>
+                        </div>
+                        <div class="input-group relative">
+                            <input type="password" asp-for="Senha" id="password" class="w-full border rounded-lg p-3 pr-10 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
+                            <label for="exampleInputPassword">Senha</label>
+                            <span class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onclick="togglePassword()">
+                                <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                                </svg>
+                            </span>
+                        </div>
+                        <button type="submit" class="w-full text-white font-bold py-3 rounded-lg transition-all botao-entrar">Cadastrar</button>
+                    </form>
+                    <p class="text-center text-gray-500 text-sm mt-4">Já tenho cadastro. <a asp-area="" asp-controller="Login" asp-action="Index" id="linkRecuperarSenha" class="hover:underline">Voltar ao Login</a></p>
                 </div>
-                <div class="input-group">
-                    <input type="email" asp-for="Email" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
-                    <label for="exampleInputEmail">E-mail</label>
-                </div>
-                <div class="input-group relative">
-                    <input type="password" asp-for="Senha" id="password" class="w-full border rounded-lg p-3 pr-10 outline-none focus:ring-2 focus:ring-brown-400" placeholder=" " required>
-                    <label for="exampleInputPassword">Senha</label>
-                    <span class="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer" onclick="togglePassword()">
-                        <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
-                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
-                        </svg>
-                    </span>
-                </div>
-                <button type="submit" class="w-full text-white font-bold py-3 rounded-lg transition-all">Cadastrar</button>
-            </form>
-            <p class="text-center text-gray-500 text-sm mt-4">Já tenho cadastro. <a asp-area="" asp-controller="Login" asp-action="Index" id="linkRecuperarSenha" class="hover:underline">Voltar ao Login</a></p>
+            </div>
         </div>
-    </div>
-    <div class="w-1/2 h-screen bg-cover bg-center" id="divImgLogin"><img id="imgLogin" src="~/img/woman-selecting-pictures-people.jpg" /></div>
+    </section>
     <script>
         function togglePassword() {
             const passwordInput = document.getElementById("password");
