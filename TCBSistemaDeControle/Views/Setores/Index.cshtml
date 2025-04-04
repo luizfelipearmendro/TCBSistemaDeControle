@@ -1,0 +1,86 @@
+﻿@model SetoresViewModel
+@{
+    ViewData["Title"] = "Setores";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script src="~/js/site.js"></script>
+
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="~/css/setores.css">
+    <title>Setores</title>
+</head>
+<body>
+
+    <!-- Mensagens de alerta -->
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert success" role="alert">
+            <span class="closebtn">&times;</span>
+            <strong>Sucesso!</strong> @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert danger" role="alert">
+            <span class="closebtn">&times;</span>
+            <strong>Atenção!</strong> @TempData["MensagemErro"]
+        </div>
+    }
+
+    <br />
+    <br />
+    <form method="get" asp-action="Index" class="search-form">
+        <input type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Busca">
+        <button type="submit">
+            <i class="fas fa-search"></i> <!-- Ícone de lupa -->
+        </button>
+    </form>
+    <br />
+    <br />
+    @if (Model?.Setores != null)
+{
+    <div class="cards-container">
+        @foreach (var setores in Model.Setores)
+        {
+            <div class="card-container">
+                <a href="/" class="hero-image-container">
+                    <img class="hero-image" src="https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg" alt="Spinning glass cube" />
+                </a>
+                <main class="main-content">
+                    <h1><a href="#">@setores.Nome</a></h1>
+                    <p>@setores.Descricao</p>
+                    <div class="flex-row">
+                        <div class="coin-base">
+                            <img src="https://i.postimg.cc/T1F1K0bW/Ethereum.png" alt="Ethereum" class="small-image" />
+                            <h2>20 funcionários</h2>
+                        </div>
+                        <div class="time-left">
+                            <img src="https://i.postimg.cc/prpyV4mH/clock-selection-no-bg.png" alt="clock" class="small-image"/>
+                            <p>@setores.DataCriacao</p>
+                        </div>
+                    </div>
+                </main>
+                <div class="card-attribute">
+                    <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="avatar" class="small-avatar" />
+                    <p>Responsável <span><a href="#">@setores.ResponsavelSetor</a></span></p>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+    <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+        Coded by <a href="#">Lauro235</a>.
+    </div>
+</body>
+</html>
