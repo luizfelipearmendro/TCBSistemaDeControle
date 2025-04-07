@@ -95,29 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
     setupNavigation("gestaodados-navegacao", "#gestaodados-sessao"); // Link "Gestao Dados" -> Seção "Gestao Dados"
     setupNavigation("relatorios-navegacao", "#relatorios-sessao"); // Link "Relatorios" -> Seção "Relatorios"
 });
-function rolagemRodape(posicaoRolagem, alturaRodape) {
-    const rodape = document.querySelector('footer');
-    const cabecalho = document.querySelector('.cabecalho-box-one');
-    const conteudo = document.querySelector('.conteúdo');
-
-    if (!rodape || !cabecalho || !conteudo) {
-        return;
-    }
-
-  
-    if (posicaoRolagem >= alturaRodape) {
-        rodape.style.bottom = '0px';
-    } else {
-        rodape.style.bottom = `-${alturaRodape}px`;
-    }
 
 
-    if (posicaoRolagem >= conteudo.offsetTop) {
-        cabecalho.classList.add('scroll-active');
-    } else {
-        cabecalho.classList.remove('scroll-active');
-    }
-}
 
 document.addEventListener("DOMContentLoaded", function () {
     const alturaJanela = window.innerHeight;
@@ -134,23 +113,22 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // Função para calcular as dimensões dinâmicas
+    
     function calcularDimensoes() {
         const alturaRodape = rodape.offsetHeight;
         const alturaConteudo = conteudo.offsetHeight;
         const alturaDocumento = alturaJanela + alturaConteudo + alturaRodape - 20;
 
-        // Ajusta as alturas dos elementos principais
+       
         animacaoRolagem.style.height = `${alturaDocumento}px`;
         principalAnimacaoRolagem.style.height = `${alturaDocumento}px`;
         cabecalho.style.height = `${alturaJanela}px`;
         invólucroParalaxe.style.marginTop = `${alturaJanela}px`;
 
-        // Chama a função de rolagem inicial
+     
         rolagemRodape(window.scrollY, alturaRodape);
     }
 
-    // Função para ajustar o comportamento do rodapé e cabeçalho
     function rolagemRodape(posicaoRolagem, alturaRodape) {
         if (posicaoRolagem >= alturaRodape) {
             rodape.style.bottom = '0px';
@@ -165,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Função para aplicar o efeito parallax
     function aplicarParallax() {
         const posicaoRolagem = window.scrollY;
         principalAnimacaoRolagem.style.top = `-${posicaoRolagem}px`;
@@ -176,14 +153,11 @@ document.addEventListener("DOMContentLoaded", function () {
         rolagemRodape(posicaoRolagem, rodape.offsetHeight);
     }
 
-    // Calcula as dimensões iniciais
     calcularDimensoes();
 
-    // Adiciona ouvintes de eventos para ajustar dinamicamente as dimensões
     window.addEventListener('resize', calcularDimensoes);
     window.addEventListener('scroll', aplicarParallax);
 
-    // Função para verificar se um elemento está visível na tela
     function estaElementoNaTela(el) {
         const retangulo = el.getBoundingClientRect();
         return (
@@ -194,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
-    // Função para aplicar animações de scroll
     function aplicarAnimacoesScroll() {
         const elementos = document.querySelectorAll('.animar-com-scroll');
         elementos.forEach((elemento) => {
@@ -206,8 +179,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Aplica animações iniciais
     aplicarAnimacoesScroll();
-
-    // Adiciona ouvinte de evento para animações de scroll
     window.addEventListener('scroll', aplicarAnimacoesScroll);
  
 

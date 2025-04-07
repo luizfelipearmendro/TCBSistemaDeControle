@@ -50,7 +50,7 @@
                 <p class="text-gray-500">TCB Sistema de Controle de Funcionários</p>
             </div>
             <div class=" bg-white" id="divForm">
-                <div class="w-96">
+                <div class="w-96 flex-form">
                     @Html.AntiForgeryToken()
                     <form asp-controller="Login" asp-action="Login" method="post">
                         <div class="input-group">
@@ -69,8 +69,10 @@
                         </div>
                         <button type="submit" class="w-full text-white font-bold py-3 rounded-lg transition-all botao-entrar">Entrar</button>
                     </form>
-                    <p class="text-center text-gray-500 text-sm mt-4">Novo aqui? <a id="linkRecuperarSenha" class="nav-link hover:underline" asp-controller="Usuarios" asp-action="Cadastrar">Cadastrar aqui</a></p>
-                    <p class="text-center text-gray-500 text-sm mt-4">Esqueceu sua senha? <a id="linkRecuperarSenha" class="nav-link hover:underline" asp-controller="Usuarios" asp-action="EsqueceuSenha">Recupere aqui</a></p>
+                    <div class="flex-redirecionar">
+                        <p class="text-center text-gray-500 text-sm mt-4">Novo aqui? <a class="nav-link hover:underline linkRecuperarSenha" asp-controller="Usuarios" asp-action="Cadastrar">Cadastrar aqui</a></p>
+                        <p class="text-center text-gray-500 text-sm mt-4">Esqueceu sua senha? <a class="nav-link hover:underline linkRecuperarSenha" asp-controller="Usuarios" asp-action="EsqueceuSenha">Recupere aqui</a></p>
+                    </div>
                 </div>
             </div>
         </div>
