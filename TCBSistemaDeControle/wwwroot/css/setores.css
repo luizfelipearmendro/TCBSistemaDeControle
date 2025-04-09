@@ -1,221 +1,236 @@
-﻿/* 
-=========================
-Fonts
-=========================
+﻿
 
-font-family: 'Outfit', sans-serif;
-
-*/
-
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
-
-/* 
-========================
-Variables
-========================
-*/
-
-
-:root {
-    font-size: 15px;
-    /* Primary */
-    --var-soft-blue: hsl(215, 51%, 70%);
-    --var-cyan: hsl(178, 100%, 50%);
-    /* Neutral */
-    --var-main-darkest: hsl(217, 54%, 11%);
-    --var-card-dark: hsl(216, 50%, 16%);
-    --var-line-dark: hsl(215, 32%, 27%);
-    --var-lightest: white;
-    /* Fonts */
-
-    --var-heading: normal normal 600 1.5em/1.6em 'Outfit', sans-serif;
-    --var-small-heading: normal normal 400 1em/1em 'Outfit', sans-serif;
-    --var-para: normal normal 300 1em/1.55em 'Outfit', sans-serif;
-}
-
-/* 
-=======================
-Setup
-=======================
-*/
-
+/* Reset básico */
 html {
-    box-sizing: border-box;
+box-sizing: border-box;
 }
 
 *, *::before, *::after {
-    box-sizing: inherit;
-    margin: 0;
+box-sizing: inherit;
+margin: 0;
+padding: 0;
 }
 
-body {
-    background-color: var(--var-main-darkest);
+.titulo-categoria {
+font-size: 2rem;
+color: black;
+font-family: 'Montserrat', sans-serif;
+position: relative; /* Permite posicionar o pseudo-elemento */
+text-align: start; /* Centraliza o título */
+margin-bottom: 20px; /* Espaçamento abaixo do título */
 }
 
-img {
-    width: 100%;
-    border-radius: 15px;
-    display: block;
+.titulo-categoria::after {
+content: ''; /* Cria o pseudo-elemento */
+display: block;
+width: 5%; /* Define a largura da borda como 50% do título */
+height: 2px; /* Define a altura da linha */
+background-color: #FFA500;
+position: absolute; /* Posiciona a linha em relação ao título */
+bottom: 0px; /* Ajusta a posição vertical da linha */
+left: .1%; /* Centraliza a linha horizontalmente */
+transform: translateX(-0%); /* Centraliza perfeitamente */
 }
 
-a {
-    color: inherit;
+.carousel-container {
+margin-bottom: 40px;
 }
 
-/* 
-
-Eye view
-
-https://i.postimg.cc/9MtT4GZY/view.png' border='0' alt='view */
-
-/*
-=========================
-Font Styling
-=========================
-*/
-
-h1 {
-    font: var(--var-heading);
-    color: var(--var-lightest);
-    padding: 1.2em 0;
+.glide__slides {
+display: flex;
+gap: 20px;
 }
 
-h2 {
-    font: var(--var-small-heading);
-    color: var(--var-lightest);
-    /* padding on .coin-base */
+.glide__slide {
+width: 100%;
+max-width: 400px;
+margin: 0 auto;
 }
-
-p {
-    font: var(--var-para);
-    color: var(--var-soft-blue);
-}
-
-span {
-    color: white;
-}
-/* 
-=====================
-Classes
-=====================
-*/
-
-/* LAYOUT */
-
 .card-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 2em auto;
-    background-color: var(--var-card-dark);
-    border-radius: 15px;
-    margin-bottom: 1rem;
-    padding: 2rem;
+position: relative;
+background: #fff;
+border-radius: 10px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+height: 70vh;
+cursor: pointer;
+overflow: hidden;
+transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-div.flex-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Overlay estilo Netflix */
+.card-container::after {
+content: "";
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 0;
+background-color: rgba(0, 0, 0, 0.95);
+transition: height 0.5s ease-in-out, transform 0.5s ease-in-out;
+transform-origin: bottom center;
+z-index: 1;
 }
 
-div.coin-base, .time-left, .card-attribute {
-    display: flex;
-    align-items: center;
-    padding: 1em 0;
+/* Quando o mouse passa, ativa o overlay e o zoom */
+.card-container:hover::after {
+height: 100%;
+transform: scale(1.1);
 }
 
-.card-attribute {
-    padding-bottom: 1.5em;
-    border-top: 2px solid var(--var-line-dark);
+/* Efeito de scale do card */
+.card-container:hover {
+transform: scale(1.05);
+z-index: 10;
 }
 
-a.hero-image-container {
-    position: relative;
-    display: block;
+/* Conteúdo do card sobre o overlay */
+.main-content {
+position: absolute;
+bottom: 0;
+padding: 20px;
+width: 100%;
+height: 100%;
+z-index: 2;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+opacity: 0;
+transform: translateY(100%);
+transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-
-
-/* Details */
-
-img.eye {
-    position: absolute;
-    width: 100%;
-    max-width: 2em;
-    top: 44%;
-    left: 43%;
+/* Mostra conteúdo com fade e slide quando hover */
+.card-container:hover .main-content {
+opacity: 1;
+transform: translateY(0);
 }
-
-@media (min-width:400px) {
-    img.eye {
-        max-width: 3em;
-    }
+.main-content h1 a{
+background: linear-gradient(90deg, #8A2BE2, #FFA500 );
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+width: 100%;
+font-weight: bold;
+font-family: "Bebas Neue", sans-serif;
+text-transform: uppercase;
+font-size: 2.2rem;
+text-decoration: none;
 }
-
-.hero-image-container::after {
-    content: '';
-    background-image: url("https://i.postimg.cc/9MtT4GZY/view.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 5rem;
-    background-color: hsla(178, 100%, 50%, 0.3);
-    width: 100%;
-    height: 100%;
-    border-radius: 1rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    z-index: 2;
-    opacity: 0;
-    transition: opacity 0.3s ease-out;
-}
-
-.hero-image-container:hover::after {
-    opacity: 1;
-}
-
-.small-image {
-    width: 1.2em;
-    margin-right: .5em;
-}
-
-.small-avatar {
-    width: 2em;
-    border-radius: 200px;
-    outline: 2px solid white;
-    margin-right: 1.4em;
-}
-
-div.attribution {
-    margin: 0 auto;
-    width: 100%;
-    font: var(--var-para);
-    text-align: center;
-    padding: 1.5em 0 4em 0;
-    color: var(--var-line-dark);
-}
-
-.attribution a {
-    color: var(--var-soft-blue);
-}
-
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centraliza os cards */
-    gap: 20px; /* Espaçamento entre os cards */
-    padding: 20px;
-}
-
-.card-container {
-    border-radius: 10px;
-    padding: 15px;
+.main-content p {
+font-size: 1rem;
+color: #ddd; 
+margin-bottom: 15px;
 }
 
 
-@media (min-width:600px) {
-    body {
-        font-size: 18px;
-    }
+.card-container .main-content .card-attribute {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
 }
+.card-attribute img {
+height: 7vh;
+}
+.card-attribute p {
+font-size: 0.9rem;
+color: #ddd; /* Alterado para cinza claro */
+}
+
+.card-attribute .botao-saibamais {
+text-decoration: none;
+color: white;
+padding: 1.5vh;
+font-family: "Roboto", sans-serif;
+background: linear-gradient(90deg,#8A2BE2, #FFA500);
+border-radius: .5vw;
+width:47%;
+text-align:center;
+    
+
+}
+.card-attribute  .time-left{
+display:flex;
+justify-content: flex-end;
+align-items:center;
+width:100%;
+gap: 1vw;
+}
+.card-attribute  .time-left p{
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+align-items:flex-start;
+margin-top: 2vh;
+}
+.card-attribute  .time-left p a{
+background: linear-gradient(90deg, #8A2BE2, #FFA500 );
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+width: 100%;
+font-weight: bold;
+font-family: "Bebas Neue", sans-serif;
+text-transform: uppercase;
+text-decoration: none;
+}
+.glide__bullets {
+position: relative;
+top: 5vh;
+}
+.glide__bullet {
+background-color: #ccc;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+border: none;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+.glide__bullet--active {
+background-color: #FFA500 !important; 
+}
+
+.glide__bullet:hover {
+background-color: #999; 
+}
+.glide__arrows {
+position: absolute;
+top: 50%;
+width: 105%;
+display: flex;
+justify-content: space-between;
+transform: translateY(-50%);
+z-index: 10;
+}
+
+.glide__arrow {
+background-color: rgba(0, 0, 0, 0.5);
+border: none;
+color: white;
+font-size: 20px;
+padding: 10px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.glide__arrow:hover {
+background-color: rgba(0, 0, 0, 0.8);
+}
+
+.glide__bullet {
+background-color: #ccc;
+border: none;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+margin: 0 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.glide__bullet.active {
+background-color: #000;
+}
+

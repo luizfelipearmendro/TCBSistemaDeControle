@@ -1,7 +1,8 @@
-﻿namespace TCBSistemaDeControle.Models
-{
-    public class SetoresViewModel
+﻿    namespace TCBSistemaDeControle.Models
     {
-        public IEnumerable<SetoresModel> Setores { get; set; }
+        public class SetoresViewModel
+        {
+            public IEnumerable<SetoresModel> Setores { get; set; }
+            public IEnumerable<CategoriaModel> Categorias { get; set; }
+        }
     }
-}

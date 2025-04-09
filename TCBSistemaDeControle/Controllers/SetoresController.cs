@@ -25,7 +25,6 @@ namespace TCBSistemaDeControle.Controllers
                 return sessionIdUsuario;
             }
         }
-
         public IActionResult Index(string searchString)
         {
             var idUsuario = HttpContext.Session.GetInt32("idUsuario");
@@ -37,9 +36,9 @@ namespace TCBSistemaDeControle.Controllers
 
             var sessionIdUsuario = dbconsult.Id;
 
-            IQueryable<SetoresModel> setoresQuery = db.Setores.Where(s => s.UsuarioId == sessionIdUsuario);
+            IQueryable<SetoresModel> setoresQuery = db.Setores
+                .Where(s => s.UsuarioId == sessionIdUsuario);
 
-            // Aplica o filtro se houver um termo de pesquisa
             if (!string.IsNullOrEmpty(searchString))
             {
                 setoresQuery = setoresQuery.Where(s =>
@@ -49,36 +48,23 @@ namespace TCBSistemaDeControle.Controllers
                 );
             }
 
-            var setores = setoresQuery.OrderBy(s => s.Nome).Select(s => new SetoresModel
-            {
-                Id = s.Id,
-                Nome = s.Nome,
-                Descricao = s.Descricao,
-                Ativo = s.Ativo,
-                DataCriacao = s.DataCriacao,
-                DataAtualizacao = s.DataAtualizacao,
-                ResponsavelSetor = s.ResponsavelSetor,
-                EmailResposavelSetor = s.EmailResposavelSetor,
-                Localizacao = s.Localizacao
-            }).ToList();
+            var setores = setoresQuery.OrderBy(s => s.Nome).ToList();
+            var categorias = db.Categorias.ToList(); // Buscando categorias do banco
 
             var viewModel = new SetoresViewModel
             {
-                Setores = setores
+                Setores = setores,
+                Categorias = categorias
             };
-
-            if (!setores.Any())
-            {
-                Console.WriteLine("Nenhum setor encontrado!");
-            }
 
             ViewBag.NomeCompleto = dbconsult.NomeCompleto;
             ViewBag.Email = dbconsult.Email;
             ViewBag.TipoPerfil = dbconsult.TipoPerfil;
-            ViewBag.SearchString = searchString; // Para manter o valor no input
+            ViewBag.SearchString = searchString;
 
             return View(viewModel);
         }
+
 
         public IActionResult Cadastrar()
         {

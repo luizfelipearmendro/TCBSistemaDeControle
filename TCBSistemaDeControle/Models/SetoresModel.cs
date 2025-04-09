@@ -25,5 +25,8 @@ namespace TCBSistemaDeControle.Models
         public char Ativo { get; set; } = 'S'; // Indica se o setor está ativo ou não
 
         public int UsuarioId { get; set; } // Identificador do usuário que criou o setor
+
+        public int CategoriaId { get; set; }  // Identificador da categoria daquele setor
+        public byte[]? ImagemSetor { get; set; } // Imagem capa Setor
     }
 }
