@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TCBSistemaDeControle.Models
 {
@@ -18,7 +19,7 @@ namespace TCBSistemaDeControle.Models
 
         public string Localizacao { get; set; } = string.Empty; // Localização dentro da empresa  
         
-        public DateTime DataCriacao { get; set; } = DateTime.Now; // Data de criação do setor  
+        public DateTime DataCriacao { get; set; } // Data de criação do setor  
 
         public DateTime DataAtualizacao { get; set; } // Data de atualização do setor
 
@@ -27,6 +28,26 @@ namespace TCBSistemaDeControle.Models
         public int UsuarioId { get; set; } // Identificador do usuário que criou o setor
 
         public int CategoriaId { get; set; }  // Identificador da categoria daquele setor
+
         public byte[]? ImagemSetor { get; set; } // Imagem capa Setor
+
+
+
+        //public virtual ICollection<FuncionariosModel> Funcionarios { get; set; } // conecta o relacionamento com a Setores
+
+        public void Desativar()
+        {
+            this.Ativo = 'N';
+        }
+
+        public void Reativar()
+        {
+            this.Ativo = 'S';
+        }
+
+        public bool EstaAtivo()
+        {
+            return this.Ativo == 'S';
+        }
     }
 }

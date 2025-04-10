@@ -17,12 +17,12 @@
 <body>
     <header class="d-flex justify-content-between align-items-center p-3 bg-light border-bottom shadow-sm">
             <!-- Botão do menu lateral -->
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" style="background-color: #3c1d11; border-color: #3c1d11;">
-                <i class="bi bi-list"></i>
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" style="background-color: #3c1d11; border-color: #3c1d11;">
+            <i class="bi bi-three-dots" style="font-size:25px;"></i>
         </button>
 
             <!-- Offcanvas Menu -->
-        <div class="offcanvas offcanvas-start show" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel" style="width: 350px;">
+        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel" style="width: 350px;">
                 <div class="offcanvas-header">
                     <a class="navbar-brand text-black fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
                         @* <i class="bi bi-house-door-fill"></i> TCBSistemaDeControle *@
