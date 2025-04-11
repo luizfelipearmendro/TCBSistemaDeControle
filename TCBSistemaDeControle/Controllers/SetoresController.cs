@@ -102,20 +102,6 @@ namespace TCBSistemaDeControle.Controllers
 
             return View(viewModel);
         }
-        public IActionResult Cadastrar()
-        {
-            var idUsuario = HttpContext.Session.GetInt32("idUsuario");
-            if (idUsuario == null) return RedirectToAction("Index", "Login");
-
-            var dbconsult = db.Usuarios.Find(idUsuario);
-            if (dbconsult == null || dbconsult.Hash != HttpContext.Session.GetString("hash"))
-                return RedirectToAction("Index", "Login");
-
-            var sessionIdUsuario = dbconsult.Id;
-
-            ViewBag.NomeCompleto = dbconsult.NomeCompleto;
-            ViewBag.Email = dbconsult.Email;
-            ViewBag.TipoPerfil = dbconsult.TipoPerfil;
 
             return View();
         }
@@ -123,48 +109,53 @@ namespace TCBSistemaDeControle.Controllers
         [HttpPost]
         public IActionResult Cadastrar(SetoresModel setor)
         {
-            
             var idUsuario = HttpContext.Session.GetInt32("idUsuario");
             if (idUsuario == null) return RedirectToAction("Index", "Login");
 
+            var hash = HttpContext.Session.GetString("hash");
+            if (string.IsNullOrEmpty(hash))
+            {
+                TempData["MensagemErro"] = "Sessão inválida. Faça login novamente.";
+                return RedirectToAction("Index", "Login");
+            }
+
             var dbconsult = db.Usuarios
                 .AsNoTracking()
-                .FirstOrDefault(u => u.Id == idUsuario && u.Hash == HttpContext.Session.GetString("hash"));
+                .FirstOrDefault(u => u.Id == idUsuario && u.Hash == hash);
 
             if (dbconsult == null) return RedirectToAction("Index", "Login");
 
             try
             {
-<<<<<<< HEAD
                 
                 if (!ModelState.IsValid)
                 {
                     TempData["MensagemErro"] = "Dados inválidos!";
-                    return View();
+                    return View(setor);
                 }
 
-                
-                var setor = new SetoresModel
+                var novoSetor = new SetoresModel
                 {
-                    Nome = nome,
-                    Descricao = descricao,
-                    ResponsavelSetor = responsavelSetor,
-                    DataCriacao = dataCriacao,
-                    UsuarioId = dbconsult.Id 
+                    Nome = setor.Nome,
+                    Descricao = setor.Descricao,
+                    ResponsavelSetor = setor.ResponsavelSetor,
+                    EmailResponsavelSetor = setor.EmailResponsavelSetor,
+                    SexoResponsavel = setor.SexoResponsavel,
+                    Localizacao = setor.Localizacao,
+                    DataCriacao = DateTime.Now,
+                    DataAtualizacao = DateTime.Now,
+                    Ativo = 1, // Define o setor como ativo por padrão
+                    UsuarioId = dbconsult.Id,
+                    CategoriaId = setor.CategoriaId,
+                    ImagemSetor = setor.ImagemSetor // Se a imagem for enviada como string
                 };
 
-            
-                db.Setores.Add(setor);
+                db.Setores.Add(novoSetor);
                 db.SaveChanges();
 
-                TempData["MensagemSucesso"] = "Setor cadastrado com sucesso!";
                 return RedirectToAction("Index");
 =======
                 if (!ModelState.IsValid)
-                {
-                    TempData["MensagemErro"] = "Dados inválidos!";
-                    return RedirectToAction("Index", "Setores");
-                }
 
                 setor.UsuarioId = sessionIdUsuario;
                 setor = setoresRepositorio.Cadastrar(setor);

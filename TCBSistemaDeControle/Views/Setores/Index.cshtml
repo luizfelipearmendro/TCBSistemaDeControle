@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Setores";
 }
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,20 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.theme.min.css" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="~/css/setores.css">
-
-    <script src="~/js/setores.js" defer></script>
-  
-
     <title>Setores</title>
 </head>
 <body>
@@ -44,39 +36,13 @@
         </div>
     }
 
-<<<<<<< HEAD
+    <!-- Spinner Overlay -->
     <div id="spinner-overlay">
         <div class="d-flex justify-content-center align-items-center"  style=" height: 100vh; position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.9); z-index: 1000;">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
-=======
-    <br />
-    <br />
-    <div class="card-attribute">
-        <a asp-controller="Setores" asp-action="Cadastrar" class="botao-saibamais">Cadastrar um novo Setor</a>
     </div>
-
-    <br />
-    <br />
-
-    @{
-        // Agrupa os setores por CategoriaId
-        var categorias = Model.Categorias;
-    }
-
-    @foreach (var categoria in categorias)
-    {
-        var setoresDaCategoria = Model.Setores.Where(s => s.CategoriaId == categoria.Id).ToList();
-        var categoriaNome = categoria.Nome;
-
-        <div>
-            <h2 class="titulo-categoria">@categoriaNome</h2>
         </div>
-        <div class="carousel-container" id="carousel-@categoria.Id">
-            <div class="glide">
-                <div class="glide__arrows" data-glide-el="controls">
-                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-chevron-left"></i></button>
-                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-chevron-right"></i></button>
                 </div>
 
                 <div class="glide__track" data-glide-el="track">
@@ -84,7 +50,6 @@
                         @if (setoresDaCategoria.Any())
                         {
                             foreach (var setor in setoresDaCategoria)
-                            {
                                 // Converte a imagem do banco
                                 var imagemUrl = !string.IsNullOrEmpty(setor.ImagemSetor)
                                 ? setor.ImagemSetor
@@ -158,9 +123,6 @@
                     }
                     @for (int i = 0; i < totalSlides; i++)
                     {
-                        <button class="glide__bullet" data-glide-dir="=@i"></button>
-                    }
-                </div>
 >>>>>>> 6d1b123fbdb6e1e4a30a25683c851a5ae5625560
             </div>
         </div>
@@ -170,7 +132,6 @@
     <div id="main-content" style="display: none;">
         <br />
         <br />
-
         @{
             var categorias = Model.Categorias;
             var possuiSetores = Model.Setores != null && Model.Setores.Any();
@@ -187,7 +148,6 @@
                                 @Html.DropDownList("categoriaId", ViewBag.CategoriasOpcoes as SelectList, "Todas as Categorias", new { @class = "form-select selected" })
                             </div>
                         </div>
-
                         <div class="input-group">
                             <p>Status</p>
                             <div class="mb-2 mr-sm-2 text-left selected">
@@ -252,7 +212,6 @@
                                                     </li>
                                                 }
                                                 @{
-                                                    
                                                     int totalSlidesBreve = Math.Max(setoresDaCategoria.Count, 3);
                                                 }
                                                 @for (int i = setoresDaCategoria.Count; i < totalSlidesBreve; i++)
@@ -277,16 +236,6 @@
                                     </div>
                                 </div>
                             }
-                        }
-                    </section>
-                }
-                else
-                {
-                    <div class="d-flex justify-content-center">
-                        <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
                 }
             </section>
         }
@@ -303,8 +252,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-
-
             const spinnerOverlay = document.getElementById('spinner-overlay');
             const mainContent = document.getElementById('main-content');
 
@@ -314,13 +261,11 @@
             }
 
             console.log("Spinner is visible. Waiting for data to load...");
-
             setTimeout(() => {
                 console.log("Data loaded. Hiding spinner and showing main content...");
 
      
                 spinnerOverlay.style.display = 'none';
-
                 mainContent.style.display = 'block';
 
                 const carousels = document.querySelectorAll('.glide');
@@ -350,7 +295,7 @@
                         },
                     }).mount();
                 });
-            }, 1000);
+            }, 1000); // Atraso de 1 segundo
         });
     </script>
 </body>
