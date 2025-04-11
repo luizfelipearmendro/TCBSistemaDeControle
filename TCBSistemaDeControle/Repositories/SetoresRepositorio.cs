@@ -45,7 +45,7 @@ namespace TCBSistemaDeControle.Repositories
             setorExistente.Nome = setor.Nome;
             setorExistente.Descricao = setor.Descricao;
             setorExistente.ResponsavelSetor = setor.ResponsavelSetor;
-            setorExistente.EmailResposavelSetor = setor.EmailResposavelSetor;
+            setorExistente.EmailResponsavelSetor = setor.EmailResponsavelSetor;
             setorExistente.Localizacao = setor.Localizacao;
             setorExistente.DataAtualizacao = DateTime.Now;
 

@@ -1,8 +1,9 @@
 using TCBSistemaDeControle.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer; // Adicione esta linha para resolver o erro CS1061
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using TCBSistemaDeControle.Repositories;
+//using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
 builder.Services.AddSession();
+
+builder.Services.AddScoped<ISetoresRepositorio, SetoresRepositorio>();
 
 var app = builder.Build();
 
@@ -53,7 +56,3 @@ app.MapControllerRoute(
     pattern: "{controller=LandingPage}/{action=Index}/{id?}");
 
 app.Run();
-
-
-
-

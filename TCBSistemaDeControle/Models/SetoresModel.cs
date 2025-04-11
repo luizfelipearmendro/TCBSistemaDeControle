@@ -15,7 +15,9 @@ namespace TCBSistemaDeControle.Models
         public string ResponsavelSetor { get; set; } = string.Empty; // Nome do responsável pelo setor  
 
         [EmailAddress(ErrorMessage = "O e-mail informado não é válido!")]
-        public string EmailResposavelSetor { get; set; } = string.Empty; // E-mail do responsável pelo setor
+        public string EmailResponsavelSetor { get; set; } = string.Empty; // E-mail do responsável pelo setor
+
+        public char SexoResponsavel { get; set; } //Sexo do responsável pelo setor
 
         public string Localizacao { get; set; } = string.Empty; // Localização dentro da empresa  
         
@@ -29,7 +31,7 @@ namespace TCBSistemaDeControle.Models
 
         public int CategoriaId { get; set; }  // Identificador da categoria daquele setor
 
-        public byte[]? ImagemSetor { get; set; } // Imagem capa Setor
+        public string? ImagemSetor { get; set; } // Imagem capa Setor
 
 
 

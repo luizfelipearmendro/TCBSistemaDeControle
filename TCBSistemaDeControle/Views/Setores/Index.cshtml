@@ -42,6 +42,12 @@
 
     <br />
     <br />
+    <div class="card-attribute">
+        <a asp-controller="Setores" asp-action="Cadastrar" class="botao-saibamais">Cadastrar um novo Setor</a>
+    </div>
+
+    <br />
+    <br />
 
     @{
         // Agrupa os setores por CategoriaId
@@ -70,19 +76,27 @@
                             foreach (var setor in setoresDaCategoria)
                             {
                                 // Converte a imagem do banco
-                                var imagemBase64 = setor.ImagemSetor != null
-                                ? $"data:image/jpeg;base64,{Convert.ToBase64String(setor.ImagemSetor)}"
-                                : "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg"; // imagem caso nao haja imagem no banco
+                                var imagemUrl = !string.IsNullOrEmpty(setor.ImagemSetor)
+                                ? setor.ImagemSetor
+                                : "https://i.ibb.co/YFCqHMz1/4966994.jpg";
 
                                 <li class="glide__slide">
-                                    <div href="/setores/@setor.Id" class="card-container" style="background-image: url('@imagemBase64');">
+                                    <div href="/setores/@setor.Id" class="card-container" style="background-image: url('@imagemUrl');">
                                         <main class="main-content">
                                             <h1><a href="/setores/@setor.Id">@setor.Nome</a></h1>
                                             <p>@setor.Descricao</p>
                                             <div class="card-attribute">
                                                 <a href="#" class="botao-saibamais">Saiba Mais</a>
                                                 <div class="time-left">
-                                                    <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="Responsável" class="small-avatar" />
+                                                    @if(setor.SexoResponsavel == 'F')
+                                                    {
+                                                        <img src="https://i.ibb.co/WWT61zQb/image-removebg-preview.png" alt="Responsável" class="small-avatar" width="60    " height="40" />
+                                                    }
+                                                    @if (setor.SexoResponsavel == 'M')
+                                                    {
+                                                        <img src="https://i.ibb.co/DPymZqqd/image-removebg-preview-1.png" alt="Responsável" class="small-avatar" width="60" height="40" />
+                                                    }
+                                                    @* <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="Responsável" class="small-avatar" /> *@
                                                     <div>
                                                         <p>
                                                             <span><a href="#">@setor.ResponsavelSetor</a></span>
