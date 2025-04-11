@@ -1,0 +1,42 @@
+﻿document.addEventListener("DOMContentLoaded", function () {
+    const conteudo = document.getElementById('conteudo-setores');
+    const filtro = document.getElementById('id-filtro');
+    const toggleButton = document.getElementById('toggle-filtro');
+    const form = document.getElementById('id-filtro');
+
+    function rolagemAoRodape(posicaoRolagem) {
+        if (!conteudo || !filtro) {
+            console.error("Elemento '#conteudo-setores' ou '#id-filtro' não encontrado!");
+            return;
+        }
+
+        const topoConteudo = conteudo.offsetTop;
+        const alturaConteudo = conteudo.offsetHeight;
+        const baseConteudo = topoConteudo + alturaConteudo;
+        if (posicaoRolagem >= topoConteudo && posicaoRolagem < baseConteudo) {
+            filtro.classList.add('filtro-scroll-active');
+        } else {
+            filtro.classList.remove('filtro-scroll-active');
+
+            if (form.classList.contains('collapsed')) {
+                form.style.display = 'block'; 
+                form.classList.remove('collapsed'); 
+            }
+        }
+    }
+    rolagemAoRodape(window.scrollY);
+
+    window.addEventListener('scroll', () => {
+        rolagemAoRodape(window.scrollY);
+    });
+
+    toggleButton.addEventListener('click', function () {
+        form.classList.toggle('collapsed');
+
+        if (form.classList.contains('collapsed')) {
+            toggleButton.textContent = '˅'; 
+        } else {
+            toggleButton.textContent = '˄'; 
+        }
+    });
+});

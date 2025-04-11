@@ -282,7 +282,7 @@ font-family: "Bebas Neue", sans-serif;
 font-weight: bold;
 text-align: center;
 text-transform: uppercase;
-font-size: 4rem;
+font-size: 3rem;
 width: fit-content;
 }
 
@@ -392,32 +392,6 @@ padding-left: 2vw;
 gap: 5vh;
 }
 
-.conteúdo .conteúdo-box-two .flex-card-servicos-detalhado-right .box-card-servicos-detalhado-one h3 {
-background: linear-gradient(90deg, #8A2BE2, #FFA500 );
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-width: 100%;
-font-weight: bold;
-font-family: "Bebas Neue", sans-serif;
-text-transform: uppercase;
-font-size: 4rem;
-}
-
-.conteúdo .conteúdo-box-two .flex-card-servicos-detalhado-right .box-card-servicos-detalhado-one p {
-font-family: "Roboto", sans-serif;
-font-size: 1.2rem;
-line-height: 1.5rem;
-}
-
-.conteúdo .conteúdo-box-two .flex-card-servicos-detalhado-right .box-card-servicos-detalhado-one a {
-background: linear-gradient(90deg,#8A2BE2, #FFA500);
-border-radius: .5vw;
-text-decoration: none;
-color: white;
-padding: 2vh;
-font-family: "Roboto", sans-serif;
-font-weight: bold;
-}
 
 .conteúdo .conteúdo-box-two .flex-card-servicos-detalhado-right .box-card-servicos-detalhado-one a:hover {
 background: #FFA500;
@@ -484,7 +458,7 @@ width: fit-content;
 font-weight: bold;
 font-family: "Bebas Neue", sans-serif;
 text-transform: uppercase;
-font-size: 4rem;
+font-size: 3rem;
 }
 
 .conteúdo .conteúdo-box-two .flex-card-servicos-detalhado-right .box-card-servicos-detalhado-one p {
@@ -597,7 +571,7 @@ width: 100%;
 font-weight: bold;
 font-family: "Bebas Neue", sans-serif;
 text-transform: uppercase;
-font-size: 4rem;
+font-size: 3rem;
 }
 
 .conteúdo .conteúdo-box-two .flex-card-servicos-detalhado-left .box-card-servicos-detalhado-one-left p {
@@ -729,7 +703,7 @@ width: 100%;
 font-weight: bold;
 font-family: "Bebas Neue", sans-serif;
 text-transform: uppercase;
-font-size: 4rem;
+font-size: 3rem;
 }
 
 .conteúdo-box-three .flex-conteúdo-box-three .body-sobre-nos p {
@@ -870,9 +844,8 @@ font-family: "Roboto", sans-serif;
 
 
 .carousel-container .glide .glide__bullets {
-display: flex;
-justify-content: center;
-margin-top: 50vh;
+position: relative;
+top: 2vh;
 }
 
 
@@ -886,7 +859,7 @@ padding-right: 2vw;
 }
 
 .contato-box-one h1 {
-font-size: 4rem;
+font-size: 3rem;
 background: linear-gradient(90deg, #8A2BE2, #FFA500);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
@@ -962,7 +935,7 @@ background: linear-gradient(90deg, #8A2BE2, #FFA500);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 font-family: "Bebas Neue", sans-serif;
-font-size: 4rem;
+font-size: 3rem;
 }
 
 .contato-body p {

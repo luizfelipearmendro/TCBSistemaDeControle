@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query;
-using Org.BouncyCastle.Crypto.Digests;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using TCBSistemaDeControle.Data;
 using TCBSistemaDeControle.Models;
 
@@ -25,47 +25,80 @@ namespace TCBSistemaDeControle.Controllers
                 return sessionIdUsuario;
             }
         }
-        public IActionResult Index(string searchString)
+        public IActionResult Index(string searchString, int? categoriaId, int? ativo)
         {
             var idUsuario = HttpContext.Session.GetInt32("idUsuario");
             if (idUsuario == null) return RedirectToAction("Index", "Login");
 
-            var dbconsult = db.Usuarios.Find(idUsuario);
-            if (dbconsult == null || dbconsult.Hash != HttpContext.Session.GetString("hash"))
-                return RedirectToAction("Index", "Login");
+            var dbconsult = db.Usuarios
+                .AsNoTracking()
+                .FirstOrDefault(u => u.Id == idUsuario && u.Hash == HttpContext.Session.GetString("hash"));
+
+            if (dbconsult == null) return RedirectToAction("Index", "Login");
 
             var sessionIdUsuario = dbconsult.Id;
 
-            IQueryable<SetoresModel> setoresQuery = db.Setores
+            // Consulta inicial dos setores
+            var setoresQuery = db.Setores
+                .AsNoTracking()
                 .Where(s => s.UsuarioId == sessionIdUsuario);
 
+            // Aplica o filtro de busca por nome
             if (!string.IsNullOrEmpty(searchString))
             {
                 setoresQuery = setoresQuery.Where(s =>
-                    s.Nome.Contains(searchString) ||
-                    s.Descricao.Contains(searchString) ||
-                    s.ResponsavelSetor.Contains(searchString)
+                    EF.Functions.Like(s.Nome, $"%{searchString}%") ||
+                    EF.Functions.Like(s.Descricao, $"%{searchString}%") ||
+                    EF.Functions.Like(s.ResponsavelSetor, $"%{searchString}%")
                 );
             }
 
-            var setores = setoresQuery.OrderBy(s => s.Nome).ToList();
-            var categorias = db.Categorias.ToList(); // Buscando categorias do banco
+            // Aplica o filtro por categoria
+            if (categoriaId.HasValue)
+            {
+                setoresQuery = setoresQuery.Where(s => s.CategoriaId == categoriaId);
+            }
+
+            // Aplica o filtro por status (ativo/inativo)
+            if (ativo.HasValue)
+            {
+                setoresQuery = setoresQuery.Where(s => s.Ativo == ativo.Value);
+            }
+
+            // Executa a consulta e ordena os resultados
+            var setoresFiltrados = setoresQuery
+                .OrderBy(s => s.Nome)
+                .ToList();
+
+            // Obtém todas as categorias do banco de dados (independentemente dos filtros)
+            var todasCategorias = db.Categorias
+                .AsNoTracking()
+                .ToList();
 
             var viewModel = new SetoresViewModel
             {
-                Setores = setores,
-                Categorias = categorias
+                Setores = setoresFiltrados,
+                Categorias = todasCategorias 
             };
 
             ViewBag.NomeCompleto = dbconsult.NomeCompleto;
             ViewBag.Email = dbconsult.Email;
             ViewBag.TipoPerfil = dbconsult.TipoPerfil;
             ViewBag.SearchString = searchString;
+            ViewBag.CategoriaId = categoriaId;
+            ViewBag.Ativo = ativo;
+
+            // Prepara as opções para os dropdowns
+            ViewBag.CategoriasOpcoes = new SelectList(todasCategorias, "Id", "Nome", categoriaId); // Todas as categorias
+            ViewBag.StatusOpcoes = new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem { Value = "", Text = "Todos" },
+                new SelectListItem { Value = "1", Text = "Ativos" },
+                new SelectListItem { Value = "0", Text = "Inativos" }
+            }, "Value", "Text", ativo);
 
             return View(viewModel);
         }
-
-
         public IActionResult Cadastrar()
         {
             return View();
@@ -74,46 +107,46 @@ namespace TCBSistemaDeControle.Controllers
         [HttpPost]
         public IActionResult Cadastrar(int? id, string nome, string descricao, int numeroFuncionarios, string responsavelSetor, string emailResponsavelSetor, string localizacao, DateTime dataCriacao, char ativo)
         {
+            
             var idUsuario = HttpContext.Session.GetInt32("idUsuario");
             if (idUsuario == null) return RedirectToAction("Index", "Login");
 
-            var dbconsult = db.Usuarios.Find(idUsuario);
-            if (dbconsult == null || dbconsult.Hash != HttpContext.Session.GetString("hash"))
-                return RedirectToAction("Index", "Login");
+            var dbconsult = db.Usuarios
+                .AsNoTracking()
+                .FirstOrDefault(u => u.Id == idUsuario && u.Hash == HttpContext.Session.GetString("hash"));
 
-            var sessionIdUsuario = dbconsult.Id;
+            if (dbconsult == null) return RedirectToAction("Index", "Login");
 
             try
             {
-                if (ModelState.IsValid)
+                
+                if (!ModelState.IsValid)
                 {
                     TempData["MensagemErro"] = "Dados inválidos!";
+                    return View();
                 }
-                    
-                SetoresModel setor;
-                setor = new SetoresModel
+
+                
+                var setor = new SetoresModel
                 {
                     Nome = nome,
                     Descricao = descricao,
                     ResponsavelSetor = responsavelSetor,
-                    EmailResposavelSetor = emailResponsavelSetor,
-                    Localizacao = localizacao,
-                    Ativo = ativo,
                     DataCriacao = dataCriacao,
-                    UsuarioId = sessionIdUsuario
+                    UsuarioId = dbconsult.Id 
                 };
 
+            
                 db.Setores.Add(setor);
+                db.SaveChanges();
 
                 TempData["MensagemSucesso"] = "Setor cadastrado com sucesso!";
-
-                return RedirectToAction("Index", "Setores");
+                return RedirectToAction("Index");
             }
             catch (System.Exception erro)
             {
                 TempData["MensagemErro"] = $"Ops, não foi possível cadastrar o setor. Detalhes do erro: {erro.Message}";
-
-                return RedirectToAction("Index", "Setores");
+                return View();
             }
         }
     }
