@@ -167,9 +167,6 @@ namespace TCBSistemaDeControle.Controllers
             catch (System.Exception erro)
             {
                 TempData["MensagemErro"] = $"Ops, não foi possível cadastrar o setor. Detalhes do erro: {erro.Message}";
-<<<<<<< HEAD
-                return View();
-=======
                 return RedirectToAction("Index", "Setores");
 >>>>>>> 6d1b123fbdb6e1e4a30a25683c851a5ae5625560
             }
