@@ -44,10 +44,124 @@
         </div>
     }
 
+<<<<<<< HEAD
     <div id="spinner-overlay">
         <div class="d-flex justify-content-center align-items-center"  style=" height: 100vh; position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.9); z-index: 1000;">
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
+=======
+    <br />
+    <br />
+    <div class="card-attribute">
+        <a asp-controller="Setores" asp-action="Cadastrar" class="botao-saibamais">Cadastrar um novo Setor</a>
+    </div>
+
+    <br />
+    <br />
+
+    @{
+        // Agrupa os setores por CategoriaId
+        var categorias = Model.Categorias;
+    }
+
+    @foreach (var categoria in categorias)
+    {
+        var setoresDaCategoria = Model.Setores.Where(s => s.CategoriaId == categoria.Id).ToList();
+        var categoriaNome = categoria.Nome;
+
+        <div>
+            <h2 class="titulo-categoria">@categoriaNome</h2>
+        </div>
+        <div class="carousel-container" id="carousel-@categoria.Id">
+            <div class="glide">
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-chevron-left"></i></button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        @if (setoresDaCategoria.Any())
+                        {
+                            foreach (var setor in setoresDaCategoria)
+                            {
+                                // Converte a imagem do banco
+                                var imagemUrl = !string.IsNullOrEmpty(setor.ImagemSetor)
+                                ? setor.ImagemSetor
+                                : "https://i.ibb.co/YFCqHMz1/4966994.jpg";
+
+                                <li class="glide__slide">
+                                    <div href="/setores/@setor.Id" class="card-container" style="background-image: url('@imagemUrl');">
+                                        <main class="main-content">
+                                            <h1><a href="/setores/@setor.Id">@setor.Nome</a></h1>
+                                            <p>@setor.Descricao</p>
+                                            <div class="card-attribute">
+                                                <a href="#" class="botao-saibamais">Saiba Mais</a>
+                                                <div class="time-left">
+                                                    @if(setor.SexoResponsavel == 'F')
+                                                    {
+                                                        <img src="https://i.ibb.co/WWT61zQb/image-removebg-preview.png" alt="Responsável" class="small-avatar" width="60    " height="40" />
+                                                    }
+                                                    @if (setor.SexoResponsavel == 'M')
+                                                    {
+                                                        <img src="https://i.ibb.co/DPymZqqd/image-removebg-preview-1.png" alt="Responsável" class="small-avatar" width="60" height="40" />
+                                                    }
+                                                    @* <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="Responsável" class="small-avatar" /> *@
+                                                    <div>
+                                                        <p>
+                                                            <span><a href="#">@setor.ResponsavelSetor</a></span>
+                                                            <span>@setor.DataCriacao.ToShortDateString()</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </main>
+                                    </div>
+                                </li>
+                            }
+
+                            int totalSlidesBreve = Math.Max(setoresDaCategoria.Count, 3);
+                            for (int i = setoresDaCategoria.Count; i < totalSlidesBreve; i++)
+                            {
+                                <li class="glide__slide">
+                                    <div class="card-container">
+                                        <main class="main-content">
+                                            <h1>EM BREVE</h1>
+                                            <p>Novos setores serão adicionados nesta categoria.</p>
+                                        </main>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="glide__slide">
+                                <div class="card-container">
+                                    <div class="hero-image-container">
+                                        <img class="hero-image" src="https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg" alt="Em breve" />
+                                    </div>
+                                    <main class="main-content">
+                                        <h1>EM BREVE</h1>
+                                        <p>Novos setores serão adicionados nesta categoria.</p>
+                                    </main>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+             
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    @{
+                        // Calcula o número total de slides (setores + "EM BREVE")
+                        int totalSlides = Math.Max(setoresDaCategoria.Count, 3);
+                    }
+                    @for (int i = 0; i < totalSlides; i++)
+                    {
+                        <button class="glide__bullet" data-glide-dir="=@i"></button>
+                    }
+                </div>
+>>>>>>> 6d1b123fbdb6e1e4a30a25683c851a5ae5625560
             </div>
         </div>
 
