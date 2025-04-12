@@ -123,43 +123,17 @@ namespace TCBSistemaDeControle.Controllers
         [HttpPost]
         public IActionResult Cadastrar(SetoresModel setor)
         {
-            
             var idUsuario = HttpContext.Session.GetInt32("idUsuario");
             if (idUsuario == null) return RedirectToAction("Index", "Login");
 
-            var dbconsult = db.Usuarios
-                .AsNoTracking()
-                .FirstOrDefault(u => u.Id == idUsuario && u.Hash == HttpContext.Session.GetString("hash"));
+            var dbconsult = db.Usuarios.Find(idUsuario);
+            if (dbconsult == null || dbconsult.Hash != HttpContext.Session.GetString("hash"))
+                return RedirectToAction("Index", "Login");
 
-            if (dbconsult == null) return RedirectToAction("Index", "Login");
+            var sessionIdUsuario = dbconsult.Id;
 
             try
             {
-<<<<<<< HEAD
-                
-                if (!ModelState.IsValid)
-                {
-                    TempData["MensagemErro"] = "Dados inválidos!";
-                    return View();
-                }
-
-                
-                var setor = new SetoresModel
-                {
-                    Nome = nome,
-                    Descricao = descricao,
-                    ResponsavelSetor = responsavelSetor,
-                    DataCriacao = dataCriacao,
-                    UsuarioId = dbconsult.Id 
-                };
-
-            
-                db.Setores.Add(setor);
-                db.SaveChanges();
-
-                TempData["MensagemSucesso"] = "Setor cadastrado com sucesso!";
-                return RedirectToAction("Index");
-=======
                 if (!ModelState.IsValid)
                 {
                     TempData["MensagemErro"] = "Dados inválidos!";
@@ -171,16 +145,11 @@ namespace TCBSistemaDeControle.Controllers
 
                 TempData["MensagemSucesso"] = "Setor cadastrado com sucesso!";
                 return RedirectToAction("Index", "Setores");
->>>>>>> 6d1b123fbdb6e1e4a30a25683c851a5ae5625560
             }
             catch (System.Exception erro)
             {
                 TempData["MensagemErro"] = $"Ops, não foi possível cadastrar o setor. Detalhes do erro: {erro.Message}";
-<<<<<<< HEAD
-                return View();
-=======
                 return RedirectToAction("Index", "Setores");
->>>>>>> 6d1b123fbdb6e1e4a30a25683c851a5ae5625560
             }
         }
     }

@@ -46,7 +46,10 @@ namespace TCBSistemaDeControle.Repositories
             setorExistente.Descricao = setor.Descricao;
             setorExistente.ResponsavelSetor = setor.ResponsavelSetor;
             setorExistente.EmailResponsavelSetor = setor.EmailResponsavelSetor;
+            setorExistente.SexoResponsavel = setor.SexoResponsavel;
             setorExistente.Localizacao = setor.Localizacao;
+            setorExistente.ImagemSetor = setor.ImagemSetor;
+            setorExistente.CategoriaId = setor.CategoriaId;
             setorExistente.DataAtualizacao = DateTime.Now;
 
             db.Setores.Update(setorExistente);

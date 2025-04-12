@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css" />
@@ -20,10 +20,6 @@
 
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="~/css/setores.css">
-
-    <script src="~/js/setores.js" defer></script>
-  
-
     <title>Setores</title>
 </head>
 <body>
@@ -44,12 +40,6 @@
         </div>
     }
 
-<<<<<<< HEAD
-    <div id="spinner-overlay">
-        <div class="d-flex justify-content-center align-items-center"  style=" height: 100vh; position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.9); z-index: 1000;">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-=======
     <br />
     <br />
     <div class="card-attribute">
@@ -71,6 +61,7 @@
 
         <div>
             <h2 class="titulo-categoria">@categoriaNome</h2>
+            <span class="titulo-span">@categoria.Descricao</span>
         </div>
         <div class="carousel-container" id="carousel-@categoria.Id">
             <div class="glide">
@@ -98,13 +89,13 @@
                                             <div class="card-attribute">
                                                 <a href="#" class="botao-saibamais">Saiba Mais</a>
                                                 <div class="time-left">
-                                                    @if(setor.SexoResponsavel == 'F')
+                                                    @if (setor.SexoResponsavel == 'F')
                                                     {
-                                                        <img src="https://i.ibb.co/WWT61zQb/image-removebg-preview.png" alt="Responsável" class="small-avatar" width="60    " height="40" />
+                                                        <img src="https://i.ibb.co/WWT61zQb/image-removebg-preview.png" alt="Responsável" class="small-avatar" width="70" height="20" />
                                                     }
                                                     @if (setor.SexoResponsavel == 'M')
                                                     {
-                                                        <img src="https://i.ibb.co/DPymZqqd/image-removebg-preview-1.png" alt="Responsável" class="small-avatar" width="60" height="40" />
+                                                        <img src="https://i.ibb.co/DPymZqqd/image-removebg-preview-1.png" alt="Responsável" class="small-avatar" width="50" height="30" />
                                                     }
                                                     @* <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="Responsável" class="small-avatar" /> *@
                                                     <div>
@@ -125,6 +116,9 @@
                             {
                                 <li class="glide__slide">
                                     <div class="card-container">
+                                        <div class="hero-image-container">
+                                            <img class="hero-image" src="https://i.ibb.co/YFCqHMz1/4966994.jpg" alt="Em breve" />
+                                        </div>
                                         <main class="main-content">
                                             <h1>EM BREVE</h1>
                                             <p>Novos setores serão adicionados nesta categoria.</p>
@@ -138,7 +132,7 @@
                             <li class="glide__slide">
                                 <div class="card-container">
                                     <div class="hero-image-container">
-                                        <img class="hero-image" src="https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg" alt="Em breve" />
+                                        <img class="hero-image" src="https://i.ibb.co/YFCqHMz1/4966994.jpg" alt="Em breve" />
                                     </div>
                                     <main class="main-content">
                                         <h1>EM BREVE</h1>
@@ -150,7 +144,7 @@
                     </ul>
                 </div>
 
-             
+
                 <div class="glide__bullets" data-glide-el="controls[nav]">
                     @{
                         // Calcula o número total de slides (setores + "EM BREVE")
@@ -161,196 +155,41 @@
                         <button class="glide__bullet" data-glide-dir="=@i"></button>
                     }
                 </div>
->>>>>>> 6d1b123fbdb6e1e4a30a25683c851a5ae5625560
             </div>
         </div>
+    }
 
-    </div>
-    
-    <div id="main-content" style="display: none;">
-        <br />
-        <br />
-
-        @{
-            var categorias = Model.Categorias;
-            var possuiSetores = Model.Setores != null && Model.Setores.Any();
-        }
-
-        @if (possuiSetores)
-        {
-            <section>
-                <form asp-controller="Setores" asp-action="Index" method="get" class="form-inline mb-4 text-center filtro" id="id-filtro">
-                    <div class="flex-input-group filtro-content">
-                        <div class="input-group">
-                            <p>Categorias</p>
-                            <div class="mb-2 mr-sm-2 text-left selected">
-                                @Html.DropDownList("categoriaId", ViewBag.CategoriasOpcoes as SelectList, "Todas as Categorias", new { @class = "form-select selected" })
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <p>Status</p>
-                            <div class="mb-2 mr-sm-2 text-left selected">
-                                @Html.DropDownList("ativo", ViewBag.StatusOpcoes as SelectList, "Todos", new { @class = "form-select selected" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex-input-two filtro-content">
-                        <input type="text" name="searchString" id="id-searchString" value="@ViewBag.SearchString" class="form-control mb-2 mr-sm-2" placeholder="Buscar setor..." />
-                        <button type="submit" class="btn btn-filtrar mb-2">Filtrar</button>
-                    </div>
-                    <button type="button" class="btn-fechar" id="toggle-filtro">
-                        ˄
-                    </button>
-                </form>
-
-               
-                @if (possuiSetores)
-                {
-                    <section id="conteudo-setores">
-                        @foreach (var categoria in Model.Categorias)
-                        {
-                            var setoresDaCategoria = Model.Setores.Where(s => s.CategoriaId == categoria.Id).ToList();
-                            if (setoresDaCategoria.Any())
-                            {
-                                <div>
-                                    <h2 class="titulo-categoria">@categoria.Nome</h2>
-                                </div>
-                                <div class="carousel-container" id="carousel-@categoria.Id">
-                                    <div class="glide">
-                                        <div class="glide__arrows" data-glide-el="controls">
-                                            <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-chevron-left"></i></button>
-                                            <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-chevron-right"></i></button>
-                                        </div>
-                                        <div class="glide__track" data-glide-el="track">
-                                            <ul class="glide__slides">
-                                                @foreach (var setor in setoresDaCategoria)
-                                                {
-                                                    // Converte a imagem do banco
-                                                    var imagemBase64 = setor.ImagemSetor != null
-                                                    ? $"data:image/jpeg;base64,{Convert.ToBase64String(setor.ImagemSetor)}"
-                                                    : "https://i.postimg.cc/NfR2yhNs/image-equilibrium.jpg"; // imagem caso não haja imagem no banco
-                                                    <li class="glide__slide">
-                                                        <div href="/setores/@setor.Id" class="card-container" style="background-image: url('@imagemBase64');">
-                                                            <main class="main-content">
-                                                                <h1><a href="/setores/@setor.Id">@setor.Nome</a></h1>
-                                                                <p>@setor.Descricao</p>
-                                                                <div class="card-attribute">
-                                                                    <a href="#" class="botao-saibamais">Saiba Mais</a>
-                                                                    <div class="time-left">
-                                                                        <img src="https://i.postimg.cc/SQBzNQf1/image-avatar.png" alt="Responsável" class="small-avatar" />
-                                                                        <div>
-                                                                            <p>
-                                                                                <span><a href="#">@setor.ResponsavelSetor</a></span>
-                                                                                <span>@setor.DataCriacao.ToShortDateString()</span>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </main>
-                                                        </div>
-                                                    </li>
-                                                }
-                                                @{
-                                                    
-                                                    int totalSlidesBreve = Math.Max(setoresDaCategoria.Count, 3);
-                                                }
-                                                @for (int i = setoresDaCategoria.Count; i < totalSlidesBreve; i++)
-                                                {
-                                                    <li class="glide__slide">
-                                                        <div class="card-container">
-                                                            <main class="main-content">
-                                                                <h1>EM BREVE</h1>
-                                                                <p>Novos setores serão adicionados nesta categoria.</p>
-                                                            </main>
-                                                        </div>
-                                                    </li>
-                                                }
-                                            </ul>
-                                        </div>
-                                        <div class="glide__bullets" data-glide-el="controls[nav]">
-                                            @for (int i = 0; i < totalSlidesBreve; i++)
-                                            {
-                                                <button class="glide__bullet" data-glide-dir="=@i"></button>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    </section>
-                }
-                else
-                {
-                    <div class="d-flex justify-content-center">
-                        <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                }
-            </section>
-        }
-        else
-        {
-            <div class="d-flex justify-content-center">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        }
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-
-
-            const spinnerOverlay = document.getElementById('spinner-overlay');
-            const mainContent = document.getElementById('main-content');
-
-            if (!spinnerOverlay || !mainContent) {
-                console.error("Spinner overlay or main content not found!");
-                return;
-            }
-
-            console.log("Spinner is visible. Waiting for data to load...");
-
-            setTimeout(() => {
-                console.log("Data loaded. Hiding spinner and showing main content...");
-
-     
-                spinnerOverlay.style.display = 'none';
-
-                mainContent.style.display = 'block';
-
-                const carousels = document.querySelectorAll('.glide');
-                carousels.forEach((carousel, index) => {
-                    new Glide(carousel, {
-                        type: 'carousel',
-                        perView: 3,
-                        gap: 20,
-                        autoplay: 3000,
+            const carousels = document.querySelectorAll('.glide');
+            carousels.forEach((carousel, index) => {
+                new Glide(carousel, {
+                    type: 'carousel',
+                    perView: 3,
+                    gap: 20,
+                    autoplay: 3000,
+                    focusAt: 'center',
+                    hoverpause: true,
+                    breakpoints: {
+                    1024: {
+                        perView: 2, // Número de slides visíveis em telas menores
                         focusAt: 'center',
-                        hoverpause: true,
-                        breakpoints: {
-                            1024: {
-                                perView: 2,
-                                focusAt: 'center',
-                                gap: 50,
-                            },
-                            768: {
-                                perView: 2,
-                                focusAt: 'center',
-                                gap: 50,
-                            },
-                            600: {
-                                perView: 1,
-                                focusAt: 'center',
-                            }
-                        },
-                    }).mount();
-                });
-            }, 1000);
+                        gap: 50,
+                    },
+                    768: {
+                        perView: 2, // Número de slides visíveis em dispositivos móveis
+                        focusAt: 'center',
+                        gap: 50,
+                    },
+                     600: {
+                        perView: 1, // Número de slides visíveis em dispositivos móveis
+                        focusAt: 'center',
+                    }
+                },
+                }).mount();
+            });
         });
     </script>
 </body>

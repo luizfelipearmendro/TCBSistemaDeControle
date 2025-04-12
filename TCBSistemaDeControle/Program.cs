@@ -56,5 +56,3 @@ app.MapControllerRoute(
     pattern: "{controller=LandingPage}/{action=Index}/{id?}");
 
 app.Run();
-
-
