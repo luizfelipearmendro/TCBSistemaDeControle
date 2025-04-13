@@ -112,63 +112,30 @@ namespace TCBSistemaDeControle.Controllers
             var idUsuario = HttpContext.Session.GetInt32("idUsuario");
             if (idUsuario == null) return RedirectToAction("Index", "Login");
 
-            var hash = HttpContext.Session.GetString("hash");
-            if (string.IsNullOrEmpty(hash))
-            {
-                TempData["MensagemErro"] = "Sessão inválida. Faça login novamente.";
+            var dbconsult = db.Usuarios.Find(idUsuario);
+            if (dbconsult == null || dbconsult.Hash != HttpContext.Session.GetString("hash"))
                 return RedirectToAction("Index", "Login");
-            }
 
-            var dbconsult = db.Usuarios
-                .AsNoTracking()
-                .FirstOrDefault(u => u.Id == idUsuario && u.Hash == hash);
-
-            if (dbconsult == null) return RedirectToAction("Index", "Login");
+            var sessionIdUsuario = dbconsult.Id;
 
             try
             {
-                
                 if (!ModelState.IsValid)
                 {
                     TempData["MensagemErro"] = "Dados inválidos!";
-                    return View(setor);
+                    return RedirectToAction("Index", "Setores");
                 }
-
-                var novoSetor = new SetoresModel
-                {
-                    Nome = setor.Nome,
-                    Descricao = setor.Descricao,
-                    ResponsavelSetor = setor.ResponsavelSetor,
-                    EmailResponsavelSetor = setor.EmailResponsavelSetor,
-                    SexoResponsavel = setor.SexoResponsavel,
-                    Localizacao = setor.Localizacao,
-                    DataCriacao = DateTime.Now,
-                    DataAtualizacao = DateTime.Now,
-                    Ativo = 1, // Define o setor como ativo por padrão
-                    UsuarioId = dbconsult.Id,
-                    CategoriaId = setor.CategoriaId,
-                    ImagemSetor = setor.ImagemSetor // Se a imagem for enviada como string
-                };
-
-                db.Setores.Add(novoSetor);
-                db.SaveChanges();
-
-                return RedirectToAction("Index");
-=======
-                if (!ModelState.IsValid)
 
                 setor.UsuarioId = sessionIdUsuario;
                 setor = setoresRepositorio.Cadastrar(setor);
 
                 TempData["MensagemSucesso"] = "Setor cadastrado com sucesso!";
                 return RedirectToAction("Index", "Setores");
->>>>>>> 6d1b123fbdb6e1e4a30a25683c851a5ae5625560
             }
             catch (System.Exception erro)
             {
                 TempData["MensagemErro"] = $"Ops, não foi possível cadastrar o setor. Detalhes do erro: {erro.Message}";
                 return RedirectToAction("Index", "Setores");
->>>>>>> 6d1b123fbdb6e1e4a30a25683c851a5ae5625560
             }
         }
     }

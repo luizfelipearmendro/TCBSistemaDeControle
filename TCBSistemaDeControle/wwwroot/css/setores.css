@@ -12,52 +12,60 @@ padding: 0;
 }
 
 .titulo-categoria {
-font-size: 2rem;
-color: black;
-font-family: 'Montserrat', sans-serif;
-position: relative; /* Permite posicionar o pseudo-elemento */
-text-align: start; /* Centraliza o título */
-margin-bottom: 20px; /* Espaçamento abaixo do título */
+    font-size: 2rem;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    position: relative; /* Permite posicionar o pseudo-elemento */
+    text-align: start; /* Centraliza o título */
+    margin-bottom: 2px; /* Espaçamento abaixo do título */
+}
+
+.titulo-span {
+    margin-bottom: 20px;
+    font-style: italic;
+    color: gray;
+    font-size: 12px;
 }
 
 .titulo-categoria::after {
-content: ''; /* Cria o pseudo-elemento */
-display: block;
-width: 5%; /* Define a largura da borda como 50% do título */
-height: 2px; /* Define a altura da linha */
-background-color: #FFA500;
-position: absolute; /* Posiciona a linha em relação ao título */
-bottom: 0px; /* Ajusta a posição vertical da linha */
-left: .1%; /* Centraliza a linha horizontalmente */
-transform: translateX(-0%); /* Centraliza perfeitamente */
+    content: ''; /* Cria o pseudo-elemento */
+    display: block;
+    width: 5%; /* Define a largura da borda como 50% do título */
+    height: 2px; /* Define a altura da linha */
+    background-color: #FFA500;
+    position: absolute; /* Posiciona a linha em relação ao título */
+    bottom: 0px; /* Ajusta a posição vertical da linha */
+    left: .1%; /* Centraliza a linha horizontalmente */
+    transform: translateX(-0%); /* Centraliza perfeitamente */
 }
 
 .carousel-container {
-margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .glide__slides {
-display: flex;
-gap: 20px;
+    display: flex;
+    gap: 20px;
 }
 
 .glide__slide {
-width: 100%;
-max-width: 400px;
-margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }
 .card-container {
-position: relative;
-background: #fff;
-border-radius: 10px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-background-repeat: no-repeat;
-background-position: center;
-background-size: cover;
-height: 70vh;
-cursor: pointer;
-overflow: hidden;
-transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 70vh;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* Overlay estilo Netflix */
@@ -348,4 +356,19 @@ background: linear-gradient(90deg, #8A2BE2, #FFA500);
 position:sticky;
 bottom: 0;
 color:white
+}
+
+
+.hero-image-container img{
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 70vh;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }

@@ -21,16 +21,22 @@
         <input asp-for="EmailResponsavelSetor" maxlength="100" required />
     </div>
     <div class="form-example">
+        <label for="sexoResponsavel">Sexo do Responsável</label>
+        <select asp-for="SexoResponsavel">
+            <option value="F">Feminino</option>
+            <option value="M">Masculino</option>
+        </select>
+    </div>
+    <div class="form-example">
         <label for="localizacao">Localização:</label>
         <input asp-for="Localizacao" required />
     </div>
     <div class="form-example">
         <label for="categoria">Categoria do Setor</label>
         <select asp-for="CategoriaId">
-            <option value="1">Recursos Humanos</option>
-            <option value="2">Financeiro</option>
-            <option value="3">Tecnologia da Informação (TI)</option>
-            <option value="4">Marketing</option>
+            <option value="1">Financeiro</option>
+            <option value="2">Tecnologia da Informação (TI)</option>
+            <option value="3">Marketing</option>
         </select>
     </div>
     <div class="form-example">
