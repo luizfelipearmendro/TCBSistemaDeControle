@@ -1,8 +1,7 @@
 ﻿
-
-/* Reset básico */
 html {
 box-sizing: border-box;
+
 }
 
 *, *::before, *::after {
@@ -11,64 +10,68 @@ margin: 0;
 padding: 0;
 }
 
+.sessao-setores{
+    padding-top: 20vh;
+}
+
 .titulo-categoria {
     font-size: 2rem;
     color: black;
     font-family: 'Montserrat', sans-serif;
-    position: relative; /* Permite posicionar o pseudo-elemento */
-    text-align: start; /* Centraliza o título */
-    margin-bottom: 2px; /* Espaçamento abaixo do título */
+    position: relative;
+    text-align: start;
+    margin-bottom: 2px;
 }
 
 .titulo-span {
-    margin-bottom: 20px;
-    font-style: italic;
-    color: gray;
-    font-size: 12px;
+margin-bottom: 20px;
+font-style: italic;
+color: gray;
+font-size: 12px;
 }
 
 .titulo-categoria::after {
-    content: ''; /* Cria o pseudo-elemento */
-    display: block;
-    width: 5%; /* Define a largura da borda como 50% do título */
-    height: 2px; /* Define a altura da linha */
-    background-color: #FFA500;
-    position: absolute; /* Posiciona a linha em relação ao título */
-    bottom: 0px; /* Ajusta a posição vertical da linha */
-    left: .1%; /* Centraliza a linha horizontalmente */
-    transform: translateX(-0%); /* Centraliza perfeitamente */
+content: ''; 
+display: block;
+width: 5%; 
+height: 2px; 
+background-color: #FFA500;
+position: absolute;
+bottom: 0px; 
+left: .1%; 
+transform: translateX(-0%); 
 }
 
 .carousel-container {
-    margin-top: 20px;
-    margin-bottom: 40px;
+margin-top: 20px;
+margin-bottom: 40px;
 }
 
 .glide__slides {
-    display: flex;
-    gap: 20px;
+display: flex;
+gap: 20px;
 }
 
 .glide__slide {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+width: 100%;
+max-width: 400px;
+margin: 0 auto;
 }
 .card-container {
-    position: relative;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 70vh;
-    cursor: pointer;
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+position: relative;
+background: #fff;
+border-radius: 10px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+height: 70vh;
+cursor: pointer;
+overflow: hidden;
+transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Overlay estilo Netflix */
+
 .card-container::after {
 content: "";
 position: absolute;
@@ -82,19 +85,19 @@ transform-origin: bottom center;
 z-index: 1;
 }
 
-/* Quando o mouse passa, ativa o overlay e o zoom */
+
 .card-container:hover::after {
 height: 100%;
 transform: scale(1.1);
 }
 
-/* Efeito de scale do card */
+
 .card-container:hover {
 transform: scale(1.05);
 z-index: 10;
 }
 
-/* Conteúdo do card sobre o overlay */
+
 .main-content {
 position: absolute;
 bottom: 0;
@@ -110,7 +113,7 @@ transform: translateY(100%);
 transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* Mostra conteúdo com fade e slide quando hover */
+
 .card-container:hover .main-content {
 opacity: 1;
 transform: translateY(0);
@@ -133,70 +136,71 @@ margin-bottom: 15px;
 }
 
 .flex-botao-edition{
-    display: flex;
-    justify-content: flex-end
+display: flex;
+justify-content: flex-end
 }
 .flex-botao-edition button{
-    border: none;
-    background-color: transparent;
-    color: white;
+border: none;
+background-color: transparent;
+color: white;
     
 }
 .flex-botao-edition button:hover{
-    background-color: transparent;
+background-color: transparent;
+
 }
 .custom-popover .flex-popover {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
 }
 .custom-popover .popover-body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    position: relative; /* Para posicionar o botão de fechamento */
-    top: 1vh;
-    padding: 1vw;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+position: relative; 
+top: 1vh;
+padding: 1vw;
 }
 
-    .custom-popover .popover-body .rota-btn {
-        text-decoration: none;
-        color: #333;
-        padding: 0.2rem;
-        border-radius: 4px;
-        transition: background-color 0.3s ease;
-    }
+.custom-popover .popover-body .rota-btn {
+text-decoration: none;
+color: #333;
+padding: 0.2rem;
+border-radius: 4px;
+transition: background-color 0.3s ease;
+}
 
-        .custom-popover .popover-body .rota-btn:hover {
-            color: #FFA500;
-        }
+.custom-popover .popover-body .rota-btn:hover {
+color: #FFA500;
+}
 
-/* Botão de fechamento no popover */
+
 .custom-popover .close-btn {
-    position: absolute;
-    top: -6vh;
-    right: 0vw;
-    font-size: 2rem;
-    color: #888;
-    cursor: pointer;
-    text-decoration: none;
+position: absolute;
+top: -6vh;
+right: 0vw;
+font-size: 2rem;
+color: #888;
+cursor: pointer;
+text-decoration: none;
 }
 .custom-popover .close-btn:hover {
-   color: black;
+color: black;
 }
 .card-container .main-content .card-attribute {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
 }
 .card-attribute img {
 height: 7vh;
 }
 .card-attribute p {
 font-size: 0.9rem;
-color: #ddd; /* Alterado para cinza claro */
+color: #ddd; 
 }
 
 .card-attribute .botao-saibamais {
@@ -237,7 +241,7 @@ text-decoration: none;
 }
 .glide__bullets {
 position: relative;
-top: 5vh;
+top: 65vh;
 }
 .glide__bullet {
 background-color: #ccc;
@@ -265,29 +269,33 @@ transform: translateY(-50%);
 z-index: 10;
 }
 
+
+
 .glide__arrow {
-background-color: rgba(0, 0, 0, 0.5);
-border: none;
-color: white;
-font-size: 20px;
-padding: 10px;
-cursor: pointer;
-transition: background-color 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
 }
 
 .glide__arrow:hover {
 background-color: rgba(0, 0, 0, 0.8);
 }
 
+
 .glide__bullet {
-background-color: #ccc;
-border: none;
-width: 10px;
-height: 10px;
-border-radius: 50%;
-margin: 0 5px;
-cursor: pointer;
-transition: background-color 0.3s ease;
+    background-color: #ccc;
+    border: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .glide__bullet.active {
@@ -300,6 +308,7 @@ grid-template-columns: repeat(2, 1fr);
 gap: 2vw;
 justify-content: center;
 align-items: center;
+padding: .1vw;
 }
 
 .flex-input-group .input-group {
@@ -328,6 +337,7 @@ opacity: 1;
 display:flex;
 justify-content:center;
 align-items:center;
+padding: .1vw;
 }
 
 .filtro.collapsed .filtro-content {
@@ -378,7 +388,8 @@ width: 20%;
 
 .filtro.filtro-scroll-active {
 background: #f9f9ff;
-box-shadow: 20px 20px 60px #f2e9e9, -20px -20px 60px #ffffff;
+box-shadow: 5px 5px 20px #f2e9e9, -5px -5px 20px #ffffff;
+top: 11vh;
 
 }
 .filtro.filtro-scroll-active #toggle-filtro{
@@ -404,24 +415,24 @@ border:none;
 padding: 1.2vh;
 }
 .btn-filtrar:hover{
-    color:white
+color:white
 }
 .botao-adicionar {
-    background-color: green;
-    border-radius: .5vw;
-    color: white;
-    font-family: "Montserrat", sans-serif;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    border: none;
-    padding: 1.2vh;
+background-color: green;
+border-radius: .5vw;
+color: white;
+font-family: "Montserrat", sans-serif;
+cursor: pointer;
+text-decoration: none;
+text-align: center;
+border: none;
+padding: 1.2vh;
 }
 .botao-adicionar:hover{
-    color:white;
+color:white;
 }
 .filtro.filtro-scroll-active .btn-filtrar {
-    background: linear-gradient(90deg, #8A2BE2, #FFA500);
+background: linear-gradient(90deg, #8A2BE2, #FFA500);
 }
 .btn-fechar{
 position:sticky;
@@ -431,15 +442,16 @@ color:white
 
 
 .hero-image-container img{
-    position: relative;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 70vh;
-    cursor: pointer;
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+position: relative;
+background: #fff;
+border-radius: 10px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+height: 70vh;
+cursor: pointer;
+overflow: hidden;
+transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
+

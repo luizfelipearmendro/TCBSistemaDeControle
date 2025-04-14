@@ -54,7 +54,7 @@
 
     @if (possuiSetores)
     {
-        <section>
+        <section class="sessao-setores">
             <form asp-controller="Setores" asp-action="Index" method="get" class="form-inline mb-4 text-center filtro" id="id-filtro">
                 <div class="flex-input-group filtro-content">
                     <div class="input-group">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="flex-input-two filtro-content">
                     <input type="text" name="searchString" value="@ViewBag.SearchString" class="form-control mb-2 mr-sm-2" placeholder="Buscar setor..." />
-                    <a asp-controller="Setores" asp-action="Cadastrar"  class=" botao-adicionar mb-2">
+                    <a type="button" class="botao-adicionar mb-2" data-bs-toggle="modal" data-bs-target="#modalCadastrarSetor">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                         </svg>
@@ -94,9 +94,9 @@
 
                         <div class="carousel-container" id="carousel-@categoria.Id">
                             <div class="glide">
-                                <div class="glide__arrows" data-glide-el="controls">
-                                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-chevron-left"></i></button>
-                                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-chevron-right"></i></button>
+                                <div class="glide__arrows" data-glide-el="controls" style="width:100%;">
+                                    <button style="background-color: rgba(0, 0, 0, 0.5); left: -5vw;" class="glide__arrow glide__arrow--left"  data-glide-dir="<"><i class="fas fa-chevron-left"></i></button>
+                                    <button style="background-color: rgba(0, 0, 0, 0.5);right: -5vw;" class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-chevron-right"></i></button>
                                 </div>
 
                                 <div class="glide__track" data-glide-el="track">
@@ -115,7 +115,7 @@
                                                                         <a class="close-btn" aria-label="Close">&times;</a>
                                                                         <a class="rota-btn" href="/Setores/editar">Editar</a>
                                                                         <a class="rota-btn" href="/Setores/desativar">Desativar</a>
-                                                                        <a class="rota-btn" href="/Setores/Cadastrar">Adicionar</a>
+                                                                        <a class="rota-btn" data-bs-toggle="modal" data-bs-target="#modalCadastrarSetor">Adicionar</a>
                                                                     </div>
                                                                 '>
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -150,6 +150,7 @@
                                                     </main>
                                                 </div>
                                             </li>
+
                                         }
 
                                         @{
@@ -182,6 +183,8 @@
                 }
             </section>
         </section>
+
+        <partial name="Cadastrar" model="new SetoresModel()" />
     }
     else
     {
@@ -192,51 +195,10 @@
         </div>
     }
 
-    <!-- Glide.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-               // Variável global para manter controle do popover ativo
-        let activePopover = null;
 
-        // Inicializa popovers
-        const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-        popoverTriggerList.map(function (popoverTriggerEl) {
-            const popover = new bootstrap.Popover(popoverTriggerEl, {
-                customClass: 'custom-popover',
-                html: true,
-                sanitize: false // Permite que HTML seja renderizado (necessário para o botão fechar funcionar)
-            });
-
-            popoverTriggerEl.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                // Se o botão clicado já é o ativo, fecha e remove referência
-                if (activePopover === popover) {
-                    popover.hide();
-                    activePopover = null;
-                } else {
-                    // Fecha o anterior (se houver)
-                    if (activePopover) {
-                        activePopover.hide();
-                    }
-
-                    // Mostra o novo
-                    popover.show();
-                    activePopover = popover;
-                }
-            });
-        });
-
-        // Fecha ao clicar no "X"
-        document.body.addEventListener('click', function (event) {
-            if (event.target.classList.contains('close-btn')) {
-                if (activePopover) {
-                    activePopover.hide();
-                    activePopover = null;
-                }
-            }
-        });
             const carousels = document.querySelectorAll('.glide');
             carousels.forEach((carousel) => {
                 new Glide(carousel, {

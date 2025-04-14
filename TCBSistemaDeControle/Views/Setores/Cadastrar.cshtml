@@ -3,45 +3,106 @@
     <title>@ViewData["Title"] </title>
 }
 
-<form asp-controller="Setores" asp-action="Cadastrar" method="post" class="form-example">
-    <div class="form-example">
-        <label for="nome">Nome:</label>
-        <input asp-for="Nome" maxlength="100" required />
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.theme.min.css" />
+
+    <link rel="stylesheet" href="~/css/cadastrar-setor.css">
+</head>
+<body>
+
+    <div class="modal fade" id="modalCadastrarSetor" aria-hidden="true" aria-labelledby="modalCadastrarSetorLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalCadastrarSetorLabel">Cadastrar Setor - Etapa 1</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form asp-controller="Setores" asp-action="Cadastrar" method="post" id="formEtapa1">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input asp-for="Nome" maxlength="100" class="form-control" placeholder="Nome" required />
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fas fa-comment"></i></span>
+                            <input asp-for="Descricao" maxlength="150" class="form-control" placeholder="Descrição" required />
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fas fa-user-tie"></i></span>
+                            <input asp-for="ResponsavelSetor" maxlength="100" class="form-control" placeholder="Responsável" required />
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input asp-for="EmailResponsavelSetor" maxlength="100" class="form-control" placeholder="E-mail Responsável" required />
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="SexoResponsavel">Sexo do Responsável:</label>
+                            <select asp-for="SexoResponsavel" class="form-select">
+                                <option value="F">Feminino</option>
+                                <option value="M">Masculino</option>
+                            </select>
+                        </div>
+
+                        <button type="button" class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalCadastrarSetorConfirmar"
+                                onclick="document.getElementById('modalCadastrarSetor').querySelector('[data-bs-dismiss]').click();">
+                            Próxima Etapa
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-example">
-        <label for="descricao">Descrição:</label>
-        <input asp-for="Descricao" maxlength="150" required />
+
+
+    <div class="modal fade" id="modalCadastrarSetorConfirmar" aria-hidden="true" aria-labelledby="modalCadastrarSetorConfirmarLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalCadastrarSetorConfirmarLabel">Cadastrar Setor - Etapa 2</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form asp-controller="Setores" asp-action="Cadastrar" method="post" id="formEtapa2">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                            <input asp-for="Localizacao" class="form-control" placeholder="Localização" required />
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="CategoriaId">Categoria do Setor:</label>
+                            <select asp-for="CategoriaId" class="form-select">
+                                <option value="1">Financeiro</option>
+                                <option value="2">Tecnologia da Informação (TI)</option>
+                                <option value="3">Marketing</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text"><i class="fas fa-image"></i></span>
+                            <input asp-for="ImagemSetor" type="url" class="form-control" placeholder="https://exemplo.com/imagem.jpg" />
+                        </div>
+                        <div class="form-example">
+                            <label for="Confirmacao">Confirmação:</label>
+                            <p>Revise as informações inseridas nas etapas anteriores.</p>
+                        </div>
+                        <button type="submit" class="btn btn-success">Finalizar Cadastro</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-example">
-        <label for="ResponsavelSetor">Responsável:</label>
-        <input asp-for="ResponsavelSetor" maxlength="100" required />
-    </div>
-    <div class="form-example">
-        <label for="EmailResponsavelSetor">E-mail Responsável:</label>
-        <input asp-for="EmailResponsavelSetor" maxlength="100" required />
-    </div>
-    <div class="form-example">
-        <label for="sexoResponsavel">Sexo do Responsável</label>
-        <select asp-for="SexoResponsavel">
-            <option value="F">Feminino</option>
-            <option value="M">Masculino</option>
-        </select>
-    </div>
-    <div class="form-example">
-        <label for="localizacao">Localização:</label>
-        <input asp-for="Localizacao" required />
-    </div>
-    <div class="form-example">
-        <label for="categoria">Categoria do Setor</label>
-        <select asp-for="CategoriaId">
-            <option value="1">Financeiro</option>
-            <option value="2">Tecnologia da Informação (TI)</option>
-            <option value="3">Marketing</option>
-        </select>
-    </div>
-    <div class="form-example">
-        <label for="ImagemSetor">URL da Imagem:</label>
-        <input asp-for="ImagemSetor" type="url" placeholder="https://exemplo.com/imagem.jpg" />
-    </div>
-    <button type="submit">Cadastrar Setor</button>
-</form>
+
+  
+</body>
+</html>

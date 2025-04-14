@@ -9,3 +9,6 @@ $(document).ready(function () {
         $('.alert').fadeOut(); // Use um ponto para separar as classes
     }, 3000); // 3000 milissegundos = 3 segundos
 });
+
+
+

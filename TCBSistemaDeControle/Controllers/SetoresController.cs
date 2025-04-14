@@ -96,11 +96,11 @@ namespace TCBSistemaDeControle.Controllers
             // Prepara as opções para os dropdowns
             ViewBag.CategoriasOpcoes = new SelectList(todasCategorias, "Id", "Nome", categoriaId); // Todas as categorias
             ViewBag.StatusOpcoes = new SelectList(new List<SelectListItem>
-     {
-         new SelectListItem { Value = "", Text = "Todos" },
-         new SelectListItem { Value = "1", Text = "Ativos" },
-         new SelectListItem { Value = "0", Text = "Inativos" }
-     }, "Value", "Text", ativo);
+             {
+                 new SelectListItem { Value = "", Text = "Todos" },
+                 new SelectListItem { Value = "1", Text = "Ativos" },
+                 new SelectListItem { Value = "0", Text = "Inativos" }
+             }, "Value", "Text", ativo);
 
 
 
