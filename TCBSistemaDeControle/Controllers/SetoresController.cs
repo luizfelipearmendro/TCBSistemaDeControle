@@ -46,20 +46,21 @@ namespace TCBSistemaDeControle.Controllers
                 .AsNoTracking()
                 .Where(s => s.UsuarioId == sessionIdUsuario);
 
-            // Aplica o filtro de busca por nome
+            // Aplica o filtro de busca por nome, descrição ou responsável
             if (!string.IsNullOrEmpty(searchString))
             {
                 setoresQuery = setoresQuery.Where(s =>
                     EF.Functions.Like(s.Nome, $"%{searchString}%") ||
                     EF.Functions.Like(s.Descricao, $"%{searchString}%") ||
-                    EF.Functions.Like(s.ResponsavelSetor, $"%{searchString}%")
+                    EF.Functions.Like(s.ResponsavelSetor, $"%{searchString}%") ||
+                    EF.Functions.Like(s.EmailResponsavelSetor, $"%{searchString}%")
                 );
             }
 
             // Aplica o filtro por categoria
             if (categoriaId.HasValue)
             {
-                setoresQuery = setoresQuery.Where(s => s.CategoriaId == categoriaId);
+                setoresQuery = setoresQuery.Where(s => s.CategoriaId == categoriaId.Value);
             }
 
             // Aplica o filtro por status (ativo/inativo)
@@ -71,6 +72,7 @@ namespace TCBSistemaDeControle.Controllers
             // Executa a consulta e ordena os resultados
             var setoresFiltrados = setoresQuery
                 .OrderBy(s => s.Nome)
+                .ThenByDescending(s => s.DataCriacao)
                 .ToList();
 
             // Obtém todas as categorias do banco de dados (independentemente dos filtros)
@@ -81,7 +83,7 @@ namespace TCBSistemaDeControle.Controllers
             var viewModel = new SetoresViewModel
             {
                 Setores = setoresFiltrados,
-                Categorias = todasCategorias 
+                Categorias = todasCategorias
             };
 
             ViewBag.NomeCompleto = dbconsult.NomeCompleto;
@@ -94,17 +96,35 @@ namespace TCBSistemaDeControle.Controllers
             // Prepara as opções para os dropdowns
             ViewBag.CategoriasOpcoes = new SelectList(todasCategorias, "Id", "Nome", categoriaId); // Todas as categorias
             ViewBag.StatusOpcoes = new SelectList(new List<SelectListItem>
-            {
-                new SelectListItem { Value = "", Text = "Todos" },
-                new SelectListItem { Value = "1", Text = "Ativos" },
-                new SelectListItem { Value = "0", Text = "Inativos" }
-            }, "Value", "Text", ativo);
+     {
+         new SelectListItem { Value = "", Text = "Todos" },
+         new SelectListItem { Value = "1", Text = "Ativos" },
+         new SelectListItem { Value = "0", Text = "Inativos" }
+     }, "Value", "Text", ativo);
+
+
 
             return View(viewModel);
         }
 
+        public IActionResult Cadastrar()
+        {
+            var idUsuario = HttpContext.Session.GetInt32("idUsuario");
+            if (idUsuario == null) return RedirectToAction("Index", "Login");
+
+            var dbconsult = db.Usuarios.Find(idUsuario);
+            if (dbconsult == null || dbconsult.Hash != HttpContext.Session.GetString("hash"))
+                return RedirectToAction("Index", "Login");
+
+            var sessionIdUsuario = dbconsult.Id;
+
+            ViewBag.NomeCompleto = dbconsult.NomeCompleto;
+            ViewBag.Email = dbconsult.Email;
+            ViewBag.TipoPerfil = dbconsult.TipoPerfil;
+
             return View();
         }
+
 
         [HttpPost]
         public IActionResult Cadastrar(SetoresModel setor)

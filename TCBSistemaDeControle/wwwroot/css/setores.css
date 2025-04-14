@@ -104,7 +104,7 @@ height: 100%;
 z-index: 2;
 display: flex;
 flex-direction: column;
-justify-content: flex-end;
+justify-content: space-around;
 opacity: 0;
 transform: translateY(100%);
 transition: opacity 0.4s ease, transform 0.4s ease;
@@ -132,12 +132,64 @@ color: #ddd;
 margin-bottom: 15px;
 }
 
+.flex-botao-edition{
+    display: flex;
+    justify-content: flex-end
+}
+.flex-botao-edition button{
+    border: none;
+    background-color: transparent;
+    color: white;
+    
+}
+.flex-botao-edition button:hover{
+    background-color: transparent;
+}
+.custom-popover .flex-popover {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.custom-popover .popover-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative; /* Para posicionar o botão de fechamento */
+    top: 1vh;
+    padding: 1vw;
+}
 
+    .custom-popover .popover-body .rota-btn {
+        text-decoration: none;
+        color: #333;
+        padding: 0.2rem;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+        .custom-popover .popover-body .rota-btn:hover {
+            color: #FFA500;
+        }
+
+/* Botão de fechamento no popover */
+.custom-popover .close-btn {
+    position: absolute;
+    top: -6vh;
+    right: 0vw;
+    font-size: 2rem;
+    color: #888;
+    cursor: pointer;
+    text-decoration: none;
+}
+.custom-popover .close-btn:hover {
+   color: black;
+}
 .card-container .main-content .card-attribute {
-display: flex;
-justify-content: center;
-align-items: center;
-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 .card-attribute img {
 height: 7vh;
@@ -273,6 +325,9 @@ max-height: 200px;
 overflow: hidden;
 transition: max-height 0.5s ease, opacity 0.5s ease;
 opacity: 1;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
 .filtro.collapsed .filtro-content {
@@ -346,11 +401,27 @@ cursor: pointer;
 text-decoration: none;
 text-align: center;
 border:none;
-padding: 1.2vh
+padding: 1.2vh;
 }
-
+.btn-filtrar:hover{
+    color:white
+}
+.botao-adicionar {
+    background-color: green;
+    border-radius: .5vw;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    padding: 1.2vh;
+}
+.botao-adicionar:hover{
+    color:white;
+}
 .filtro.filtro-scroll-active .btn-filtrar {
-background: linear-gradient(90deg, #8A2BE2, #FFA500);
+    background: linear-gradient(90deg, #8A2BE2, #FFA500);
 }
 .btn-fechar{
 position:sticky;
