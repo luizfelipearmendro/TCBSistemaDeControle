@@ -21,15 +21,15 @@
 </head>
 <body>
 
-    <div class="modal fade" id="modalCadastrarSetor" aria-hidden="true" aria-labelledby="modalCadastrarSetorLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalCadastrarSetorLabel">Cadastrar Setor - Etapa 1</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form asp-controller="Setores" asp-action="Cadastrar" method="post" id="formEtapa1">
+    <form asp-controller="Setores" asp-action="Cadastrar" method="post" id="formCompleto">
+        <div class="modal fade" id="modalCadastrarSetor" aria-hidden="true" aria-labelledby="modalCadastrarSetorLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 id="modalCadastrarSetorLabel">Cadastrar Setor - Etapa 1</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
                         <div class="input-group mb-3">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                             <input asp-for="Nome" maxlength="100" class="form-control" placeholder="Nome" required />
@@ -54,28 +54,25 @@
                             </select>
                         </div>
 
-                        <button type="button" class="btn btn-primary"
+                        <button type="button" class="btn botao-proxima-etapa"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modalCadastrarSetorConfirmar"
                                 onclick="document.getElementById('modalCadastrarSetor').querySelector('[data-bs-dismiss]').click();">
                             Próxima Etapa
                         </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-
-    <div class="modal fade" id="modalCadastrarSetorConfirmar" aria-hidden="true" aria-labelledby="modalCadastrarSetorConfirmarLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalCadastrarSetorConfirmarLabel">Cadastrar Setor - Etapa 2</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form asp-controller="Setores" asp-action="Cadastrar" method="post" id="formEtapa2">
+        <div class="modal fade" id="modalCadastrarSetorConfirmar" aria-hidden="true" aria-labelledby="modalCadastrarSetorConfirmarLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 id="modalCadastrarSetorConfirmarLabel">Cadastrar Setor - Etapa 2</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
                         <div class="input-group mb-3">
                             <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                             <input asp-for="Localizacao" class="form-control" placeholder="Localização" required />
@@ -97,11 +94,12 @@
                             <p>Revise as informações inseridas nas etapas anteriores.</p>
                         </div>
                         <button type="submit" class="btn btn-success">Finalizar Cadastro</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+
 
   
 </body>
