@@ -21,12 +21,12 @@
 </head>
 <body>
     <header class="d-flex justify-content-between align-items-center p-3 bg-dark border-bottom shadow-sm" style="position:fixed; width:100%; z-index: 10000000; background:black;">
-            <!-- Botão do menu lateral -->
+        <!-- Botão do menu lateral -->
         <button class="btn botao-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" >
             <i class="bi bi-three-dots" style="font-size:25px;"></i>
         </button>
 
-            <!-- Offcanvas Menu -->
+        <!-- Offcanvas Menu -->
         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-header" >
                 <a  class="navbar-brand fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
@@ -35,13 +35,20 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-  
+
                 <!-- Dropdown de usuário -->
-                    <div class="dropdown">
-                        <img src="https://i.ibb.co/DPymZqqd/image-removebg-preview-1.png" alt="Avatar" class="rounded-circle" />
-                        <div class="flex-user-body" >
+                <div class="dropdown">
+                    <img src="https://i.ibb.co/DPymZqqd/image-removebg-preview-1.png" alt="Avatar" class="rounded-circle" />
+                    <div class="flex-user-body" >
                         <span class="me-2 nome-user" data-bs-toggle="dropdown" aria-expanded="false">Olá, @ViewBag.NomeCompleto!</span>
-                        <span class="me-2" style="color:gray; font-weight:bold;font-size:.8rem;" data-bs-toggle="dropdown" aria-expanded="false">Administrador <span><i class="bi bi-caret-down-fill"></i></span></span>
+                        @if(ViewBag.TipoPerfil == 1)
+                        {
+                            <span class="me-2" style="color:gray; font-weight:bold;font-size:.8rem;" data-bs-toggle="dropdown" aria-expanded="false">Administrador <span><i class="bi bi-caret-down-fill"></i></span></span>
+                        }
+                        else
+                        {
+                            <span class="me-2" style="color:gray; font-weight:bold;font-size:.8rem;" data-bs-toggle="dropdown" aria-expanded="false">Lider <span><i class="bi bi-caret-down-fill"></i></span></span>
+                        }
                         <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
                                     <a class="dropdown-item" asp-controller="Login" asp-action="Logout">
@@ -49,7 +56,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" asp-controller="Usuario" asp-action="AlterarSenha">
+                                    <a class="dropdown-item" asp-controller="Usuario" asp-action="AtualizarSenha">
                                         <i class="bi bi-key-fill me-2"></i> Alterar Senha
                                     </a>
                                 </li>
@@ -59,9 +66,8 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
-
                     </div>
+                </div>
                     <hr />
                     <ul class="nav flex-column">
                  

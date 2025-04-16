@@ -1,9 +1,8 @@
 ﻿@model SetoresViewModel
 @{
     ViewData["Title"] = "Setores";
-
-
 }
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -117,58 +116,59 @@
                                             var popoverHtml = $@"
                                             <div class='popover-body'>
                                             <a class='close-btn' aria-label='Close' style='margin-top: 15px;'>&times;</a>
-                                            <a role='button' class='rota-btn' data-bs-toggle='modal' data-bs-target='#modalEditarSetor' setor-id='{setor.Id}'>Editar</a>
-                                            <a role='button' class='rota-btn' data-bs-toggle='modal' data-bs-target='#modalDesativarSetor' setor-id='{setor.Id}' setor-name='{setor.Nome}'>Desativar</a>
+                                            <a role='button' class='rota-btn editar-setor' data-bs-toggle='modal' data-bs-target='#modalEditarSetor' data-id='{setor.Id}'>Editar</a>
+                                            <a role='button' class='rota-btn' data-bs-toggle='modal' data-bs-target='#modalDesativarSetor' setor-id='{setor.Id}' setor-nome='{setor.Nome}'>Desativar</a>
                                             </div>";
-                                            @* <a class='rota-btn' data-bs-toggle='modal' data-bs-target='#modalCadastrarSetor'>Adicionar</a> *@
 
                                             <li class="glide__slide">
                                                 <div class="card-container" style="background-image: url('@setor.ImagemSetor');">
                                                     <main class="main-content">
                                                         <div class="flex-botao-edition">
-                                                            <button type="button"  id="popoverButton"
-                                                                    data-bs-toggle="popover" data-bs-placement="right"
+                                                            <button type="button"
+                                                                    class="btn-popover"
+                                                                    data-bs-toggle="popover"
+                                                                    data-bs-placement="right"
                                                                     data-bs-html="true"
-                                                                    data-bs-content='
-                                                                    <div class="popover-body">
-                                                                        <a class="close-btn" aria-label="Close">&times;</a>
-                                                                        <a class="rota-btn" href="/Setores/editar">Editar</a>
-                                                                        <a class="rota-btn" href="/Setores/desativar">Desativar</a>
-                                                                        <a class="rota-btn" data-bs-toggle="modal" data-bs-target="#modalCadastrarSetor">Adicionar</a>
-                                                                    </div>
-                                                                '>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                                            </svg>
-                                                        </button>
+                                                                    data-bs-content="@popoverHtml">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                                                     class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                                                </svg>
+                                                            </button>
                                                         </div>
-
                                                         <div class="flex-main">
                                                             <h1><a href="/setores/@setor.Id">@setor.Nome</a></h1>
                                                             <p>@setor.Descricao</p>
 
                                                             <div class="card-attribute">
-                                                                <a href="/setores/@setor.Id" class="botao-saibamais">Saiba Mais</a>
-                                                                <div class="time-left">
+                                                                <a asp-controller="Funcionarios" asp-action="Index" asp-route-id="@setor.Id" class="botao-saibamais">Acessar Setor</a>
+                                                                <div class="time-left" style="margin-left: 25px;">
                                                                     @if (setor.SexoResponsavel == 'F')
                                                                     {
-                                                                        <img src="https://i.ibb.co/WWT61zQb/image-removebg-preview.png" alt="Responsável" class="small-avatar" />
+                                                                        <img src="https://i.ibb.co/WWT61zQb/image-removebg-preview.png" alt="Responsável" class="small-avatar" width="70" height="70"/>
                                                                     }
                                                                     @if (setor.SexoResponsavel == 'M')
                                                                     {
-                                                                        <img src="https://i.ibb.co/DPymZqqd/image-removebg-preview-1.png" alt="Responsável" class="small-avatar" />
+                                                                        <img src="https://i.ibb.co/DPymZqqd/image-removebg-preview-1.png" alt="Responsável" class="small-avatar" width="70" height="70" />
                                                                     }
 
                                                                     <div>
                                                                         <p>
                                                                             <span><a href="#">@setor.ResponsavelSetor</a></span>
-                                                                            <span>@setor.DataCriacao.ToShortDateString()</span>
+                                                                            <span class="me-3" style="color:gray; font-style:italic;font-size:10px;">Criado em:
+                                                                                <span style="color:white;font-size:11px;">@setor.DataCriacao.ToShortDateString()</span>
+                                                                            </span>
+                                                                            <span class="me-3" style="color:gray; font-style:italic;font-size:10px;">
+                                                                                Funcionários:
+                                                                                <span style="color:white;font-size:11px;">
+                                                                                    @(Model.QuantidadePorSetor.FirstOrDefault(q => q.SetorId == setor.Id)?.Quantidade ?? 0)
+                                                                                </span>
+                                                                            </span>
                                                                         </p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        
                                                     </main>
                                                 </div>
                                             </li>
@@ -229,10 +229,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalDesativarSetorLabel" style="font-weight:bold">Desativar Setor</h5>
+                    <h5 class="modal-title text-black" id="modalDesativarSetorLabel" style="font-weight:bold">Desativar Setor</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-black">
                     Tem certeza que deseja desativar o setor <span id="modalUserName"></span>?
                 </div>
                 <div class="modal-footer">
@@ -265,18 +265,21 @@
             });
         });
 
-        document.addEventListener("DOMContentLoaded", function () {
-            var deleteModal = document.getElementById('modalDesativarSetor');
-            deleteModal.addEventListener('show.bs.modal', function (event) {
-                var button = event.relatedTarget;
+        document.addEventListener("click", function (event) {
+            if (event.target.matches("[data-bs-target='#modalDesativarSetor']")) {
+                var button = event.target;
                 var setorId = button.getAttribute('setor-id');
-                var setorName = button.getAttribute('setor-name');
+                var setorName = button.getAttribute('setor-nome');
                 var modalUserName = document.getElementById('modalUserName');
                 var confirmDeleteButton = document.getElementById('confirmDeleteButton');
 
-                modalUserName.textContent = setorName;
-                confirmDeleteButton.href = '/Setores/Desativar/' + setorId;
-            });
+                if (modalUserName && setorName) {
+                    modalUserName.textContent = setorName;
+                }
+                if (confirmDeleteButton && setorId) {
+                    confirmDeleteButton.href = '/Setores/Desativar/' + setorId;
+                }
+            }
         });
     </script>
 </body>

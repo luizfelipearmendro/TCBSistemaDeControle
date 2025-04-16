@@ -47,6 +47,26 @@ namespace TCBSistemaDeControle.Models
 
         public DateTime? DataAtualizacao { get; set; } // data da ultima atualizacao do cadastro
 
-        public char Ativo { get; set; } // status do funcionario
+        public char Ativo { get; set; } = 'S'; // status do funcionario
+
+
+
+
+        public SetoresModel Setor { get; set; }
+
+        public void Desativar()
+        {
+            this.Ativo = 'N';
+        }
+
+        public void Reativar()
+        {
+            this.Ativo = 'S';
+        }
+
+        public bool EstaAtivo()
+        {
+            return this.Ativo == 'S';
+        }
     }
 }

@@ -23,6 +23,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddSession();
 
 builder.Services.AddScoped<ISetoresRepositorio, SetoresRepositorio>();
+builder.Services.AddScoped<IFuncionariosRepositorio, FuncionariosRepositorio>();
 
 var app = builder.Build();
 

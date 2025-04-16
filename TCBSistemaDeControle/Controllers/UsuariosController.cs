@@ -76,17 +76,17 @@ namespace TCBSistemaDeControle.Controllers
                 HtmlBody = @"
                 <html>
                     <body>
-                        <img src='cid:logo' alt='Logo TCB' width='120' height='90' />
+                        <img src='cid:logo' alt='Logo TCB' width='70' height='60' />
                         <p>" + mensagemCorpo + @"</p>
                     </body>
                 </html>"
             };
 
             // Caminho físico da imagem
-            var logoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "imglogo.png");
+            var logoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "logo2TCB-removebg-preview.png");
 
             // Adicionando a logo como anexo inline
-            bodyBuilder.Attachments.Add(logoPath, new ContentType("image", "png") { Name = "imglogo.png" })
+            bodyBuilder.Attachments.Add(logoPath, new ContentType("image", "png") { Name = "logo2TCB-removebg-preview.png" })
                          .ContentId = "logo";
 
             message.Body = bodyBuilder.ToMessageBody();
@@ -149,7 +149,7 @@ namespace TCBSistemaDeControle.Controllers
 
                     string resetLink = Url.Action("AtualizarSenha", "Usuarios", new { id = usuario.Id, hash = usuario.Hash }, protocol: HttpContext.Request.Scheme);
 
-                    EnviarEmail(usuario.Email, "Recuperação de Senha", $"Clique no link para redefinir sua senha: <a href='{resetLink}'>Redefinir Senha</a>");
+                    EnviarEmail(usuario.Email, "Recuperação de Senha", $"Olá {usuario.NomeCompleto}, você solicitou a recuperação de sua senha, clique para <a href='{resetLink}'>Redefinir sua Senha</a>");
 
                     TempData["MensagemSucesso"] = "Email de recuperação enviado com sucesso!";
                     return RedirectToAction("Index", "Login");

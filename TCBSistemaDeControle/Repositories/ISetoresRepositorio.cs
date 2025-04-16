@@ -12,8 +12,6 @@ namespace TCBSistemaDeControle.Repositories
 
         SetoresModel Editar(SetoresModel setor);
 
-        //List<FuncionariosPorSetorViewModel> ObterFuncionariosPorSetor();
-
         bool Desativar(int id);
 
         bool Reativar(int id);

@@ -74,19 +74,32 @@ namespace TCBSistemaDeControle.Controllers
 
             // Executa a consulta e ordena os resultados
             var setoresFiltrados = setoresQuery
-                .OrderBy(s => s.Nome)
-                .ThenByDescending(s => s.DataCriacao)
-                .ToList();
+                                   .OrderBy(s => s.Nome)
+                                   .ThenByDescending(s => s.DataCriacao)
+                                   .ToList();
 
             // Obtém todas as categorias do banco de dados (independentemente dos filtros)
             var todasCategorias = db.Categorias
-                .AsNoTracking()
-                .ToList();
+                                    .AsNoTracking()
+                                    .ToList();
+
+
+            // ----------------------------------------------------- quantidade de funcionarios por setor
+
+            var quantidadeFunc = db.Funcionarios
+                                   .GroupBy(f => f.SetorId)
+                                   .Select(g => new SetoresViewModel
+                                   {
+                                       SetorId = g.Key,
+                                       Quantidade = g.Count()
+                                   })
+                                   .ToList();
 
             var viewModel = new SetoresViewModel
             {
                 Setores = setoresFiltrados,
-                Categorias = todasCategorias
+                Categorias = todasCategorias,
+                QuantidadePorSetor = quantidadeFunc
             };
 
             ViewBag.NomeCompleto = dbconsult.NomeCompleto;

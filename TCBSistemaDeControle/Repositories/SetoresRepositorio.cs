@@ -88,18 +88,5 @@ namespace TCBSistemaDeControle.Repositories
 
             return true;
         }
-
-        //public List<FuncionariosPorSetorViewModel> ObterFuncionariosPorSetor()
-        //{
-        //    return db.Funcionarios
-        //        .Include(f => f.Setor)
-        //        .GroupBy(f => f.Setor.Nome)
-        //        .Select(g => new FuncionariosPorSetorViewModel
-        //        {
-        //            Setor = g.Key,
-        //            Quantidade = g.Count()
-        //        })
-        //        .ToList();
-        //}
     }
 }
