@@ -25,7 +25,7 @@ namespace TCBSistemaDeControle.Models
 
         public DateTime DataAtualizacao { get; set; } // Data de atualização do setor
 
-        public int Ativo { get; set; }  // Indica se o setor está ativo ou não
+        public char Ativo { get; set; } = 'S';  // Indica se o setor está ativo ou não
 
         public int UsuarioId { get; set; } // Identificador do usuário que criou o setor
 

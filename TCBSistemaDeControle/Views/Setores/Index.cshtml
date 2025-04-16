@@ -48,8 +48,6 @@
     @{
         var categorias = Model.Categorias;
         var possuiSetores = Model.Setores != null && Model.Setores.Any();
-
-
     }
 
     @if (possuiSetores)
@@ -60,13 +58,23 @@
                     <div class="input-group">
                         <p>Categorias</p>
                         <div class="mb-2 mr-sm-2 text-left selected">
-                            @Html.DropDownList("categoriaId", ViewBag.CategoriasOpcoes as SelectList, "Todas as Categorias", new { @class = "form-select selected" })
+                            @Html.DropDownList(
+                                         "categoriaId", 
+                                         ViewBag.CategoriasOpcoes as SelectList, 
+                                         "Todas as Categorias", 
+                                         new { @class = "form-select selected" }
+                                     )
                         </div>
                     </div>
                     <div class="input-group">
                         <p>Status</p>
                         <div class="mb-2 mr-sm-2 text-left selected">
-                            @Html.DropDownList("ativo", ViewBag.StatusOpcoes as SelectList, "Todos", new { @class = "form-select selected" })
+                            @Html.DropDownList(
+                                         "ativo",
+                                         ViewBag.StatusOpcoes as SelectList,
+                                         "Todos",
+                                         new { @class = "form-select selected" }
+                                     )
                         </div>
                     </div>
                 </div>
@@ -103,29 +111,32 @@
                                     <ul class="glide__slides">
                                         @foreach (var setor in setoresDaCategoria)
                                         {
+                                            var popoverHtml = $@"
+                                            <div class='popover-body'>
+                                            <a class='close-btn' aria-label='Close' style='margin-top: 15px;'>&times;</a>
+                                            <a role='button' class='rota-btn' data-bs-toggle='modal' data-bs-target='#modalEditarSetor' setor-id='{setor.Id}'>Editar</a>
+                                            <a role='button' class='rota-btn' data-bs-toggle='modal' data-bs-target='#modalDesativarSetor' setor-id='{setor.Id}' setor-name='{setor.Nome}'>Desativar</a>
+                                            </div>";
+                                            @* <a class='rota-btn' data-bs-toggle='modal' data-bs-target='#modalCadastrarSetor'>Adicionar</a> *@
+
                                             <li class="glide__slide">
                                                 <div class="card-container" style="background-image: url('@setor.ImagemSetor');">
                                                     <main class="main-content">
                                                         <div class="flex-botao-edition">
-                                                            <button type="button"  id="popoverButton"
+                                                            <button type="button" id="popoverButton"
                                                                     data-bs-toggle="popover" data-bs-placement="right"
                                                                     data-bs-html="true"
-                                                                    data-bs-content='
-                                                                    <div class="popover-body">
-                                                                        <a class="close-btn" aria-label="Close">&times;</a>
-                                                                        <a class="rota-btn" href="/Setores/editar">Editar</a>
-                                                                        <a class="rota-btn" href="/Setores/desativar">Desativar</a>
-                                                                        <a class="rota-btn" data-bs-toggle="modal" data-bs-target="#modalCadastrarSetor">Adicionar</a>
-                                                                    </div>
-                                                                '>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                                            </svg>
-                                                        </button>
+                                                                    data-bs-content="@Html.Raw(popoverHtml)">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                                                </svg>
+                                                            </button>
                                                         </div>
-                                                        <div class="flex-main" >
+
+                                                        <div class="flex-main">
                                                             <h1><a href="/setores/@setor.Id">@setor.Nome</a></h1>
                                                             <p>@setor.Descricao</p>
+
                                                             <div class="card-attribute">
                                                                 <a href="/setores/@setor.Id" class="botao-saibamais">Saiba Mais</a>
                                                                 <div class="time-left">
@@ -137,6 +148,7 @@
                                                                     {
                                                                         <img src="https://i.ibb.co/DPymZqqd/image-removebg-preview-1.png" alt="Responsável" class="small-avatar" />
                                                                     }
+
                                                                     <div>
                                                                         <p>
                                                                             <span><a href="#">@setor.ResponsavelSetor</a></span>
@@ -146,13 +158,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        
                                                     </main>
                                                 </div>
                                             </li>
-
                                         }
-
                                         @{
                                             int totalSlidesBreve = Math.Max(setoresDaCategoria.Count, 3);
                                         }
@@ -185,6 +194,7 @@
         </section>
 
         <partial name="Cadastrar" model="new SetoresModel()" />
+        <partial name="Editar" model="new SetoresModel()" />
     }
     else
     {
@@ -194,6 +204,25 @@
             </div>
         </div>
     }
+
+    <!-- modal desativar setor -->
+    <div class="modal fade" id="modalDesativarSetor" tabindex="-1" aria-labelledby="modalDesativarSetorLabel" aria-hidden="true" style="z-index:100000001;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDesativarSetorLabel" style="font-weight:bold">Desativar Setor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja desativar o setor <span id="modalUserName"></span>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <a id="confirmDeleteButton" role="button" class="btn btn-danger">Desativar</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"></script>
     <script>
@@ -214,6 +243,20 @@
                         600: { perView: 1 }
                     }
                 }).mount();
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var deleteModal = document.getElementById('modalDesativarSetor');
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var setorId = button.getAttribute('setor-id');
+                var setorName = button.getAttribute('setor-name');
+                var modalUserName = document.getElementById('modalUserName');
+                var confirmDeleteButton = document.getElementById('confirmDeleteButton');
+
+                modalUserName.textContent = setorName;
+                confirmDeleteButton.href = '/Setores/Desativar/' + setorId;
             });
         });
     </script>

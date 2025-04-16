@@ -10,7 +10,7 @@ namespace TCBSistemaDeControle.Repositories
 
         SetoresModel Cadastrar(SetoresModel setor);
 
-        SetoresModel Atualizar(SetoresModel setor);
+        SetoresModel Editar(SetoresModel setor);
 
         //List<FuncionariosPorSetorViewModel> ObterFuncionariosPorSetor();
 

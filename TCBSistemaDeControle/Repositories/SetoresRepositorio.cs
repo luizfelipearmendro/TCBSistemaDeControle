@@ -35,7 +35,7 @@ namespace TCBSistemaDeControle.Repositories
             return setor;
         }
 
-        public SetoresModel Atualizar(SetoresModel setor)
+        public SetoresModel Editar(SetoresModel setor)
         {
             var setorExistente = ListarPorId(setor.Id);
 
