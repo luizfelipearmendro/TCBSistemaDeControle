@@ -161,7 +161,7 @@ flex-direction: column;
 gap: 0.5rem;
 position: relative; 
 top: 1vh;
-padding: 1vw;
+
 }
 
 .custom-popover .popover-body .rota-btn {
@@ -349,7 +349,7 @@ padding: 0;
 
 #toggle-filtro {
 position: absolute;
-bottom: -20px;
+bottom: -5vh;
 left: 50%;
 transform: translateX(-50%);
 background-color: #8A2BE2;
@@ -389,11 +389,12 @@ width: 20%;
 .filtro.filtro-scroll-active {
 background: #f9f9ff;
 box-shadow: 5px 5px 20px #f2e9e9, -5px -5px 20px #ffffff;
-top: 11vh;
+top: 14vh;
 
 }
 .filtro.filtro-scroll-active #toggle-filtro{
 display:block;
+
 
 }
 
